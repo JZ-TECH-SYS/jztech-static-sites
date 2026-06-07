@@ -1,0 +1,74 @@
+# JZ-TECH — sites estaticos no GKE (1 nginx, roteado por Host no Gateway compartilhado)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: static-sites
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-sites
+  namespace: static-sites
+  labels: { app: static-sites }
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels: { app: static-sites }
+  template:
+    metadata:
+      labels: { app: static-sites }
+    spec:
+      containers:
+        - name: nginx
+          image: southamerica-east1-docker.pkg.dev/jztech-490722/jztech-docker-prod/static-sites:latest
+          imagePullPolicy: Always
+          ports:
+            - { containerPort: 80, name: http }
+          readinessProbe:
+            httpGet: { path: /nginx-health, port: 80 }
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /nginx-health, port: 80 }
+            initialDelaySeconds: 5
+            periodSeconds: 20
+          resources:
+            requests: { cpu: 10m, memory: 32Mi }
+            limits:   { cpu: 200m, memory: 128Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: static-sites
+  namespace: static-sites
+  labels: { app: static-sites }
+spec:
+  type: ClusterIP
+  selector: { app: static-sites }
+  ports:
+    - { name: http, port: 80, targetPort: 80 }
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: static-sites
+  namespace: static-sites
+spec:
+  parentRefs:
+    - { name: jztech-gateway, namespace: gateway-infra, sectionName: https }
+  hostnames:
+    - joaosn.jztech.com.br
+    - leticia.jztech.com.br
+    - prescila.jztech.com.br
+    - street.style.links.jztech.com.br
+    - jean.jztech.com.br
+    - jg-eletricista.jztech.com.br
+    - scooby.aquarios.link.jztech.com.br
+    - juninho-mototaxi.jztech.com.br
+    - clientecelularis.jztech.com.br
+    - jztech.com.br
+    - www.jztech.com.br
+  rules:
+    - backendRefs:
+        - { name: static-sites, port: 80 }
