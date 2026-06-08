@@ -77,9 +77,14 @@ jobs:
           docker build -t "$IMG" .
           docker push "$IMG"
 
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: jztech-gke-prod
+          location: southamerica-east1-a
+
       - name: Deploy no GKE
         run: |
-          gcloud container clusters get-credentials jztech-gke-prod --zone southamerica-east1-a --project "${{ vars.GCP_PROJECT_ID }}"
           kubectl apply -f k8s.yaml
           kubectl rollout restart deployment/static-sites -n static-sites
           kubectl rollout status deployment/static-sites -n static-sites --timeout=180s
