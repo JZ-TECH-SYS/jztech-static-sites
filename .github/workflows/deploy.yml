@@ -1,0 +1,85 @@
+name: Deploy static-sites to GKE
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sites-src/**'
+      - 'nginx.conf'
+      - 'Dockerfile'
+      - 'k8s.yaml'
+      - 'build.sh'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: static-sites-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build & Deploy (1 nginx, todos os sites)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      IMG: southamerica-east1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/jztech-docker-prod/static-sites:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Auth GCP (Workload Identity)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker (Artifact Registry)
+        run: gcloud auth configure-docker southamerica-east1-docker.pkg.dev --quiet
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build sites (Vite -> build; estático -> copia) e imagem nginx
+        run: |
+          set -euo pipefail
+          rm -rf sites && mkdir -p sites
+          MAP='
+          jztech.com.br|vite
+          joaosn.jztech.com.br|vite
+          prescila.jztech.com.br|vite
+          scooby.aquarios.link.jztech.com.br|vite
+          jg-eletricista.jztech.com.br|vite
+          juninho-mototaxi.jztech.com.br|vite
+          leticia.jztech.com.br|static
+          street.style.links.jztech.com.br|static
+          jean.jztech.com.br|static
+          '
+          echo "$MAP" | while IFS='|' read -r site type; do
+            [ -z "$site" ] && continue
+            src="sites-src/$site"; [ -d "$src" ] || { echo "!! sem fonte $src"; continue; }
+            echo "== $site ($type) =="
+            if [ "$type" = vite ]; then
+              tmp="$(mktemp -d)"
+              rsync -a --exclude=node_modules --exclude=dist --exclude=.pnpm-store "$src/" "$tmp/"
+              ( cd "$tmp" && npm install --no-audit --no-fund && npm run build )
+              mkdir -p "sites/$site" && cp -r "$tmp/dist/." "sites/$site/"
+              rm -rf "$tmp"
+            else
+              mkdir -p "sites/$site" && rsync -a --exclude=node_modules "$src/" "sites/$site/"
+            fi
+          done
+          mkdir -p sites/clientecelularis.jztech.com.br
+          printf '<!doctype html><html lang=pt-BR><meta charset=utf-8><title>Em breve</title><body style="font-family:sans-serif;text-align:center;padding:4rem"><h1>Em construção</h1></body></html>' > sites/clientecelularis.jztech.com.br/index.html
+          docker build -t "$IMG" .
+          docker push "$IMG"
+
+      - name: Deploy no GKE
+        run: |
+          gcloud container clusters get-credentials jztech-gke-prod --zone southamerica-east1-a --project "${{ vars.GCP_PROJECT_ID }}"
+          kubectl apply -f k8s.yaml
+          kubectl rollout restart deployment/static-sites -n static-sites
+          kubectl rollout status deployment/static-sites -n static-sites --timeout=180s
