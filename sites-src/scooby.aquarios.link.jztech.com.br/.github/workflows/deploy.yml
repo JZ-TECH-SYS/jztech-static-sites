@@ -1,0 +1,36 @@
+name: Deploy estático (scooby_aquarrios)
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Instalar dependências
+        run: npm install --force
+      - name: Build
+        run: npm run build
+      - name: Copiar .htaccess para dist
+        run: cp .htaccess dist/
+      - name: Upload arquivos
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ secrets.FTP_PROTOCOL || 'ftp' }}
+          port: ${{ secrets.FTP_PORT || '21' }}
+          timeout: ${{ secrets.FTP_TIMEOUT || '120000' }}
+          log-level: ${{ secrets.FTP_LOG_LEVEL || 'standard' }}
+          local-dir: ./dist/
+          server-dir: /scooby.aquarios.link.jztech.com.br/
+          exclude: |
+            **/.git*
+            **/.github*

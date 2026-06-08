@@ -1,4 +1,7 @@
 sites/
 node_modules/
+dist/
+.pnpm-store/
+.vite/
 *.tgz
 .DS_Store

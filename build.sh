@@ -1,44 +1,42 @@
 #!/usr/bin/env bash
-# Monta a imagem UNIFICADA dos sites estaticos a partir dos REPOS-FONTE (cada site no seu repo).
-# Vite -> builda (npm) e usa dist/; plain static -> copia a raiz. clientecelularis = placeholder (sem repo).
-# Uso: ./build.sh [--push]   (--push tambem faz rollout no GKE)
+# Monta a imagem UNIFICADA dos sites estaticos a partir do FONTE em sites-src/ (fonte unica da verdade).
+# Vite -> builda (node22+npm, num tmp pra nao sujar sites-src); estatico -> copia. Uso: ./build.sh [--push]
 set -uo pipefail
 export PATH="/home/jvzyz/google-cloud-sdk/bin:$PATH"
 IMG="southamerica-east1-docker.pkg.dev/jztech-490722/jztech-docker-prod/static-sites:latest"
 HERE="$(cd "$(dirname "$0")" && pwd)"; cd "$HERE"
-WORK="$(mktemp -d)"; rm -rf sites; mkdir -p sites
+rm -rf sites; mkdir -p sites
 
-# site (= dominio/docroot) | repo-fonte | tipo (vite|static)
+# dominio (= docroot) | tipo (vite|static)
 MAP='
-jztech.com.br|JZ-TECH-SYS/landing-page|vite
-joaosn.jztech.com.br|joaosn/joaosn-portifolio|vite
-prescila.jztech.com.br|joaosn/land-page-prescila|vite
-scooby.aquarios.link.jztech.com.br|joaosn/scooby_aquario|vite
-jg-eletricista.jztech.com.br|joaosn/JG-eletricista|vite
-juninho-mototaxi.jztech.com.br|joaosn/junio-moto-taxi|vite
-leticia.jztech.com.br|joaosn/niverleticia|static
-street.style.links.jztech.com.br|joaosn/street-style-landing|static
-jean.jztech.com.br|JeanFelipe10/Portifolio|static
+jztech.com.br|vite
+joaosn.jztech.com.br|vite
+prescila.jztech.com.br|vite
+scooby.aquarios.link.jztech.com.br|vite
+jg-eletricista.jztech.com.br|vite
+juninho-mototaxi.jztech.com.br|vite
+leticia.jztech.com.br|static
+street.style.links.jztech.com.br|static
+jean.jztech.com.br|static
 '
-echo "$MAP" | while IFS='|' read -r site repo type; do
+echo "$MAP" | while IFS='|' read -r site type; do
   [ -z "$site" ] && continue
-  echo "== $site ($repo, $type) =="
-  gh repo clone "$repo" "$WORK/$site" -- -q --depth 1 || { echo "  ERRO clone $repo"; continue; }
+  src="sites-src/$site"; [ -d "$src" ] || { echo "  !! sem fonte $src"; continue; }
+  echo "== $site ($type) =="
   if [ "$type" = vite ]; then
-    # builda fresh (node 22 + npm). Se falhar, usa o dist/ commitado como fallback.
-    docker run --rm -v "$WORK/$site":/app -w /app node:22-alpine sh -c \
-      'rm -rf node_modules; npm install --no-audit --no-fund >/dev/null 2>&1 && npm run build >/dev/null 2>&1' || true
-    if [ -d "$WORK/$site/dist" ]; then cp -r "$WORK/$site/dist/." "sites/$site/" 2>/dev/null || { mkdir -p "sites/$site"; cp -r "$WORK/$site/dist/." "sites/$site/"; }
-    else echo "  !! sem dist (build falhou e sem dist commitado)"; fi
+    tmp="$(mktemp -d)"
+    rsync -a --exclude=node_modules --exclude=dist --exclude=.pnpm-store "$src/" "$tmp/"
+    docker run --rm -v "$tmp":/app -w /app node:22-alpine sh -c \
+      'npm install --no-audit --no-fund >/dev/null 2>&1 && npm run build >/dev/null 2>&1' || true
+    if [ -d "$tmp/dist" ]; then mkdir -p "sites/$site"; cp -r "$tmp/dist/." "sites/$site/"; else echo "  !! BUILD FALHOU ($site)"; fi
+    rm -rf "$tmp"
   else
-    mkdir -p "sites/$site"
-    rsync -a --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='*.md' \
-      --exclude='.ftp-deploy-sync-state.json' "$WORK/$site/" "sites/$site/"
+    mkdir -p "sites/$site"; rsync -a --exclude=node_modules "$src/" "sites/$site/"
   fi
-  echo "  -> $(find "sites/$site" -type f 2>/dev/null | wc -l) arquivos"
+  echo "  -> $(find "sites/$site" -type f 2>/dev/null | wc -l) arq"
 done
 
-# clientecelularis: sem repo (era placeholder lixo na HG) -> placeholder limpo
+# clientecelularis: sem repo (era lixo na HG) -> placeholder
 mkdir -p sites/clientecelularis.jztech.com.br
 printf '<!doctype html><html lang=pt-BR><meta charset=utf-8><title>Em breve</title><body style="font-family:sans-serif;text-align:center;padding:4rem"><h1>Em construção</h1></body></html>' \
   > sites/clientecelularis.jztech.com.br/index.html
@@ -48,5 +46,5 @@ if [ "${1:-}" = "--push" ]; then
   docker push "$IMG"
   USE_GKE_GCLOUD_AUTH_PLUGIN=True kubectl rollout restart deployment/static-sites -n static-sites
 fi
-rm -rf "$WORK"
+rm -rf sites
 echo "OK."

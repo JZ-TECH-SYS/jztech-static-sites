@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0f172a;
+  background-color: #e0f4ff;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.6), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.35), transparent 24%),
+    linear-gradient(180deg, #0ea5e9 0%, #22d3ee 40%, #e0f7ff 100%);
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background-color: #a5f3fc;
+  color: #0f172a;
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-2xl border border-white/40 shadow-[0_20px_60px_-25px_rgba(15,23,42,0.35)];
+  }
+}
+
+@layer utilities {
+  .gradient-outline {
+    position: relative;
+  }
+
+  .gradient-outline::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #38bdf8, #22d3ee, #0ea5e9);
+    opacity: 0.7;
+    z-index: -1;
+  }
+
+  .floating {
+    animation: float 7s ease-in-out infinite;
+  }
+
+  .floating-delayed {
+    animation: float 8s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+
+  .rise {
+    animation: rise 14s linear infinite;
+  }
+
+  .blur-spot {
+    filter: blur(60px);
+    opacity: 0.35;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.4;
+  }
+  85% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}

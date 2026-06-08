@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>!Feliz Aniversário, Leticia!</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <!-- AOS CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Amatic+SC:wght@400;700&display=swap"
+      rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- SweetAlert CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    <!-- Seu CSS personalizado -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Arial, sans-serif";
+        background-color: #fff;
+        margin: 0;
+      }
+
+      main {
+        padding-bottom: 80px;
+        /* Espaço para o rodapé */
+      }
+
+      header {
+        background: linear-gradient(135deg, #4a90e2, #007aff);
+        color: white;
+        text-shadow: 2px 2px 4px #000;
+        padding: 60px 0;
+      }
+
+      header h1 {
+        font-family: "Pacifico", cursive;
+        font-size: 3rem;
+      }
+
+      header p {
+        font-size: 1.5rem;
+      }
+
+      /* Para telas menores que 768px (tablets e celulares maiores) */
+      @media (max-width: 768px) {
+        body {
+          font-size: 1.5rem; /* Aumentado de 1.3rem */
+        }
+
+        header h1 {
+          font-size: 3rem; /* Aumentado de 2.8rem */
+        }
+
+        header p {
+          font-size: 1.7rem; /* Aumentado de 1.5rem */
+        }
+
+        .love-phrase {
+          font-size: 2.8rem; /* Aumentado de 2.5rem */
+        }
+
+        footer p {
+          font-size: 1.3rem; /* Aumentado para melhor leitura */
+        }
+      }
+
+      /* Para telas menores que 576px (celulares menores) */
+      @media (max-width: 576px) {
+        body {
+          font-size: 1.6rem; /* Aumentado de 1.5rem */
+        }
+
+        header h1 {
+          font-size: 3.2rem; /* Aumentado de 3rem */
+        }
+
+        header p {
+          font-size: 1.9rem; /* Aumentado de 1.8rem */
+        }
+
+        .love-phrase {
+          font-size: 3.2rem; /* Aumentado de 3rem */
+        }
+
+        .carousel-item img {
+          max-height: 320px; /* Levemente ajustado */
+        }
+
+        footer p {
+          font-size: 1.4rem; /* Aumentado para melhor visibilidade */
+        }
+      }
+
+      /* Estilo para o container do carrossel */
+      .carousel {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      /* Ajuste dos itens do carrossel */
+      .carousel-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+      }
+
+      .carousel-item img {
+        max-height: 500px;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 10px;
+      }
+
+      /* Responsividade para dispositivos móveis */
+      @media (max-width: 768px) {
+        body {
+          font-size: 1.2rem;
+        }
+
+        .carousel-item img {
+          max-height: 300px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        body {
+          font-size: 1.5rem;
+        }
+
+        header h1 {
+          font-size: 2.5rem;
+        }
+
+        header p {
+          font-size: 1.2rem;
+        }
+      }
+
+      .caption {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 1.2em;
+        color: #333;
+      }
+
+      .carousel-control-prev {
+        left: 10px;
+        background-color: black;
+        color: black;
+      }
+
+      .carousel-control-next {
+        right: 10px;
+        background-color: black;
+        color: black;
+      }
+
+      /* Estilo para o rodapé */
+      footer {
+        background-color: #f8f9fa;
+        padding: 20px 0;
+        text-align: center;
+        color: #555;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999;
+      }
+
+      /* Estilo para a imagem no modal */
+      #modalImage {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
+      }
+
+      .modal-body {
+        padding: 0;
+      }
+
+      .btn-close-white {
+        filter: invert(1);
+      }
+
+      /* Estilo para o contêiner dos corações */
+      .hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      /* Estilo para cada coração */
+      .hearts i {
+        position: absolute;
+        color: rgba(255, 0, 0, 0.9);
+        font-size: 20px;
+        animation: fall 5s linear infinite;
+      }
+
+      /* Animação dos corações */
+      @keyframes fall {
+        0% {
+          top: -10%;
+          opacity: 1;
+        }
+
+        100% {
+          top: 110%;
+          opacity: 0;
+        }
+      }
+
+      /* Garantir que o conteúdo principal fique acima dos corações */
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Estilo para o coração grande */
+      .big-heart {
+        font-size: 500px;
+        cursor: pointer;
+        animation: pulse 2s infinite;
+      }
+
+      /* Animação de pulsação */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+
+        70% {
+          transform: scale(1.1);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Estilo para a frase de amor */
+      .love-phrase {
+        font-size: 2rem;
+        color: #ff0000;
+        margin-bottom: 20px;
+      }
+      #carouselText p {
+        font-size: 1.5rem;
+        color: #555;
+        font-style: italic;
+        font-family: "Pacifico", cursive; /* Use Dancing Script */
+        text-align: center; /* Centraliza o texto */
+        line-height: 1.8; /* Dá um espaço maior entre as linhas */
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      #carouselText .active-text {
+        opacity: 1;
+      }
+
+      #carouselText .d-none {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      /* Ajustes manuais para os textos */
+      header h1 {
+        font-size: 4rem; /* Título principal maior */
+      }
+
+      header p {
+        font-size: 2rem; /* Subtítulo maior */
+      }
+
+      .love-phrase {
+        font-size: 3.5rem; /* Frase de amor maior */
+      }
+
+      .carousel-item img {
+        max-height: 700px; /* Ajuste nas imagens do carrossel */
+      }
+
+      footer p {
+        font-size: 3.5rem; /* Texto do rodapé maior */
+      }
+
+      #carouselText p {
+        font-size: 2.3rem; /* Texto dos carrosséis maior */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="hearts"></div>
+
+    <div class="content">
+      <!-- Seção de Cabeçalho -->
+      <header class="text-center text-white" data-aos="fade-down">
+        <h1>
+          <i class="fas fa-heart text-danger"></i> Feliz Aniversário, Leticia!
+        </h1>
+        <p>
+          Você é a luz que ilumina meus dias. João te ama "Memo"
+          <i class="fas fa-heart text-danger"></i>
+        </p>
+      </header>
+
+      <main class="container">
+        <!-- Coração Grande com a frase -->
+        <section class="text-center my-5">
+          <h2 class="love-phrase">Te amo mil milhões</h2>
+          <a href="#">
+            <i
+              class="fas fa-heart text-danger big-heart"
+              data-aos="zoom-in"></i>
+          </a>
+        </section>
+        <hr />
+        <!-- Carrossel 1 -->
+        <section class="container my-5">
+          <div
+            id="carouselExample1"
+            class="carousel slide carousel-fade"
+            data-bs-ride="carousel"
+            data-aos="fade-up">
+            <div class="carousel-inner">
+              <!-- Slides do Carrossel 1 -->
+              <div class="carousel-item active">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal1/foto.webp">
+                  <img
+                    src="./fotos/modal1/foto.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal1/foto1.webp">
+                  <img
+                    src="./fotos/modal1/foto1.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal1/foto2.webp">
+                  <img
+                    src="./fotos/modal1/foto2.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal1/foto3.webp">
+                  <img
+                    src="./fotos/modal1/foto3.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+            </div>
+            <!-- Botões de controle -->
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample1"
+              data-bs-slide="prev">
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample1"
+              data-bs-slide="next">
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div id="carouselText" class="text-center mt-3">
+            <p class="active-text">
+              "✨ Nosso primeiro rolê no shopping 🛍️, ainda estávamos nos
+              conhecendo, mas eu já estava super na sua! 🥰 Foi tão especial
+              que, mesmo com toda a vergonha, pedi pra gente tirar nossa
+              primeira foto de mãos dadas 🤝❤️. Nunca vou esquecer esse dia! 🌟"
+              "😂 O segundo rolê foi o verdadeiro teste, né? Uma corrida 🏃‍♂️🔥 ao
+              meio-dia no sol torrando! ☀️ Obrigado por ter ido comigo, mesmo
+              assim. Amo você demais! ❤️😘"
+            </p>
+          </div>
+        </section>
+
+        <!-- Carrossel 2 -->
+        <section class="container my-5">
+          <div
+            id="carouselExample2"
+            class="carousel slide carousel-fade"
+            data-bs-ride="carousel"
+            data-aos="fade-up">
+            <div class="carousel-inner">
+              <!-- Slides do Carrossel 2 -->
+              <div class="carousel-item active">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal2/foto.webp">
+                  <img
+                    src="./fotos/modal2/foto.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal2/foto1.webp">
+                  <img
+                    src="./fotos/modal2/foto1.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal2/foto2.webp">
+                  <img
+                    src="./fotos/modal2/foto2.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal2/foto3.webp">
+                  <img
+                    src="./fotos/modal2/foto3.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+            </div>
+            <!-- Botões de controle -->
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample2"
+              data-bs-slide="prev">
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample2"
+              data-bs-slide="next">
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div id="carouselText" class="text-center mt-3">
+            <p class="active-text">
+              "🌊 Realizando o sonho da minha gata de conhecer a praia! 🏖️💕
+              Quanta alegria me deu poder te ajudar a realizar esse sonho. Foram
+              tantos momentos incríveis juntos, cheios de risadas e amor! 😍✨ E
+              que maravilha, em março tem de novo! Bora láaa, meu amor! ❤️🌟"
+            </p>
+          </div>
+        </section>
+
+        <!-- Carrossel 3 -->
+        <section class="container my-5">
+          <div
+            id="carouselExample3"
+            class="carousel slide carousel-fade"
+            data-bs-ride="carousel"
+            data-aos="fade-up">
+            <div class="carousel-inner">
+              <!-- Slides do Carrossel 3 -->
+              <div class="carousel-item active">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto.webp">
+                  <img
+                    src="./fotos/modal3/foto.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto1.webp">
+                  <img
+                    src="./fotos/modal3/foto1.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto2.webp">
+                  <img
+                    src="./fotos/modal3/foto2.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto3.webp">
+                  <img
+                    src="./fotos/modal3/foto3.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto4.webp">
+                  <img
+                    src="./fotos/modal3/foto4.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto5.webp">
+                  <img
+                    src="./fotos/modal3/foto5.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto6.webp">
+                  <img
+                    src="./fotos/modal3/foto6.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto7.webp">
+                  <img
+                    src="./fotos/modal3/foto7.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <div class="carousel-item">
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-image="./fotos/modal3/foto8.webp">
+                  <img
+                    src="./fotos/modal3/foto8.webp"
+                    class="d-block w-100"
+                    alt="..."
+                    loading="lazy" />
+                </a>
+              </div>
+              <!-- Adicione mais slides conforme necessário -->
+            </div>
+            <!-- Botões de controle -->
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample3"
+              data-bs-slide="prev">
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample3"
+              data-bs-slide="next">
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div id="carouselText" class="text-center mt-3">
+            <p class="active-text">
+              🏋️‍♂️💪 Aqui não tem nem o que falar, né? Foi na bendita academia que
+              a gente se viu pela primeira vez! 🏋️‍♀️✨ Ela é quem deixou (e
+              deixa!) nossa relação cada vez mais forte, tanto no treino quanto
+              no amor. ❤️🔥 Em busca do **shape inexplicável**, né? 😏💪 Como
+              dizem: *casal que treina junto cresce junto*! 👫❤️‍🔥 #AllDay
+              #BoraBuscar #CasalFinesse #NoPainNoGain #FitnessLove 🏋️‍♀️🏋️‍♂️💥"
+            </p>
+          </div>
+        </section>
+
+        <!-- Mensagem Pessoal -->
+        <section class="container text-center bg-light py-5" data-aos="fade-up">
+          <div class="container">
+            <h2>Para a mulher mais incrível que conheço</h2>
+            <p class="lead">
+              Leticia, cada momento ao seu lado é simplesmente mágico! ✨ Você
+              trouxe alegria, amor e luz para a minha vida, e eu sou imensamente
+              grato por cada dia que tenho ao seu lado. ❤️ Que este seja apenas
+              o primeiro de muitos aniversários incríveis que comemoraremos
+              juntos, sempre lado a lado. 🥂🎂 Te amo mil milhões, meu amor!
+              💕🌟<i class="fas fa-heart text-danger"></i>
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+      <p>
+        &copy; 2024 João | Feito com
+        <i class="fas fa-heart text-danger"></i> para Leticia
+      </p>
+    </footer>
+
+    <!-- Modal de Imagem -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Botão de fechar -->
+          <div class="modal-header border-0">
+            <button
+              type="button"
+              class="btn-close btn-close-dark"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            <img
+              width="100%"
+              height="100%"
+              src=""
+              id="modalImage"
+              alt="Imagem ampliada" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+
+      // Atualizar a imagem do modal ao clicar na imagem do carrossel
+      const imageModal = document.getElementById("imageModal");
+      imageModal.addEventListener("show.bs.modal", function (event) {
+        const link = event.relatedTarget;
+        const imageSrc = link.getAttribute("data-image");
+        const modalImage = document.getElementById("modalImage");
+        modalImage.src = imageSrc;
+      });
+
+      // Função para gerar os corações
+      function createHearts() {
+        const heartContainer = document.querySelector(".hearts");
+        setInterval(() => {
+          const heart = document.createElement("i");
+          heart.classList.add("fas", "fa-heart");
+          heart.style.left = Math.random() * window.innerWidth + "px";
+          heart.style.animationDuration = 3 + Math.random() * 2 + "s"; // Duração entre 3s e 5s
+          heart.style.opacity = Math.random();
+          heart.style.fontSize = Math.random() * 20 + 20 + "px";
+          heartContainer.appendChild(heart);
+          setTimeout(() => {
+            heart.remove();
+          }, 10000);
+        }, 300);
+      }
+
+      createHearts();
+
+      // Frases de amor
+      const lovePhrases = [
+        "Te amo mil milhões! ❤️💫",
+        "Não me ama mais não é? 😢💔",
+        "Se gosta de mim? 😘💕",
+        "A gente vai casar quando? 💍💑",
+        "Min gosta de carrinho 🚗💨",
+        "Ewwwwww vito vito 😂❤️",
+        "Se me ama? 🥹💓",
+        "Promete que vai me amar pra sempre? 🌟🤞",
+        "Promete que nunca vai largar de mim? 💕🤗",
+        "Nunca vou desistir de você! 🌈💪",
+        "Eu amo, e não é pouco não! ❤️🔥",
+      ];
+
+      // Exibir frase com SweetAlert ao clicar no coração grande
+      const bigHeart = document.querySelector(".big-heart");
+
+      bigHeart.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevenir o comportamento padrão do link
+
+        const phrase =
+          lovePhrases[Math.floor(Math.random() * lovePhrases.length)];
+
+        Swal.fire({
+          text: phrase,
+          width: 600,
+          padding: "3em",
+          color: "#ff0000",
+          background: "#fff",
+          timer: 3000,
+          showConfirmButton: false,
+        });
+      });
+
+      // Função para iniciar o áudio
+      function playAudio() {
+        const audio = document.getElementById("backgroundMusic");
+        if (audio) {
+          audio.play().catch((error) => {
+            Swal.fire({
+              title: "Clique para iniciar a música 🎵",
+              icon: "info",
+              confirmButtonText: "OK",
+              allowOutsideClick: false, // Evita que o SweetAlert feche ao clicar fora
+              allowEscapeKey: false, // Evita fechar com a tecla ESC
+            }).then(() => {
+              // Tenta tocar a música novamente após o clique no botão OK
+              audio.play().catch((error) => {
+                console.warn("Reprodução bloqueada mesmo após interação.");
+              });
+            });
+          });
+        }
+      }
+
+      // Adiciona evento para iniciar o áudio ao carregar a página
+      window.addEventListener("load", playAudio);
+    </script>
+    <audio id="backgroundMusic" loop>
+      <source src="./musica.mp3" type="audio/mpeg" />
+    </audio>
+  </body>
+</html>

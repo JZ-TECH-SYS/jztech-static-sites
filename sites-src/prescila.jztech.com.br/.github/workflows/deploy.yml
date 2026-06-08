@@ -1,0 +1,32 @@
+name: Deploy estático (landing-page-precisa)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Instalar dependências
+        run: npm install --force
+      - name: Build
+        run: npm run build
+      - name: Copiar .htaccess para dist
+        run: cp .htaccess dist/
+      - name: Upload arquivos
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: /prescila.jztech.com.br/
+          exclude: |
+            **/.git*
+            **/.github*
