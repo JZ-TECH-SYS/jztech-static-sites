@@ -1,7 +1,8 @@
 
 // ===== CONFIGURAÇÃO DOS LINKS =====
 const LINKS = {
-    WHATSAPP_URL: "https://wa.me/554498212703?text=Olá%20Street%20Style!%20Vim%20através%20do%20link%20in%20bio.",
+    
+    WHATSAPP_URL: "https://wa.me/5544997657197?text=Olá%20Street%20Style!%20Vim%20através%20do%20link%20in%20bio.",
     GRUPO_VIP_URL: "https://chat.whatsapp.com/FynZ1aK2K0S2qAicxbYPuD?mode=ems_wa_t",
     SITE_URL: "https://streetstyle.com.br/",
     INSTAGRAM_URL: "https://www.instagram.com/street_style.044?igsh=cWdqcHcxbzdvamti"
