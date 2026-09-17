@@ -1,120 +1,65 @@
-export const StatsSection = () => {
-  const stats = [
-    {
-      value: "+15",
-      label: "Projetos entregues",
-      animation: "floatX",
-      duration: "2s",
-    },
-    {
-      value: "+10",
-      label: "Clientes atendidos",
-      animation: "floatY",
-      duration: "2s",
-    },
-    {
-      value: "3+",
-      label: "Anos de experiência",
-      animation: "floatXY",
-      duration: "2s",
-    },
-  ];
+const STATS = [
+  {
+    value: "+30",
+    label: "Projetos entregues",
+    note: "100% no prazo acordado",
+    highlight: true,
+  },
+  {
+    value: "+10",
+    label: "Clientes atendidos",
+    note: "Em diversas frentes do mercado",
+    highlight: false,
+  },
+  {
+    value: "3+",
+    label: "Anos de experiência",
+    note: "Evolução técnica contínua",
+    highlight: true,
+  },
+];
 
-  return (
-    <section className="relative py-20 bg-slate-900 overflow-hidden px-4">
-      {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
+export const StatsSection = () => (
+  <section
+    className="py-24 bg-[#FAFAFA] border-b border-slate-200/60"
+    id="resultados"
+  >
+    <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
+      <div data-reveal className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-semibold uppercase tracking-wider mb-3">
+        Nossos Números
       </div>
+      <h2 data-reveal style={{ transitionDelay: "80ms" }} className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 mb-4">
+        Resultados <span className="text-brand-700">Que Inspiram</span>
+      </h2>
+      <p data-reveal style={{ transitionDelay: "160ms" }} className="text-slate-600 max-w-2xl mx-auto text-base sm:text-lg mb-16 leading-relaxed">
+        Ao longo da nossa jornada, conquistamos resultados que demonstram nosso
+        compromisso com a excelência.
+      </p>
 
-      <div className="relative z-10 max-w-6xl mx-auto text-center">
-        <div className="inline-flex items-center px-4 py-2 rounded-full glass border border-white/20 text-sm font-medium text-white/90 mb-6">
-          Nossos Números
-        </div>
-        <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-          <span className="text-white">Resultados </span>
-          <span className="text-gradient">Que Inspiram</span>
-        </h2>
-        <p className="text-xl text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
-          Ao longo da nossa jornada, conquistamos resultados que demonstram
-          nosso compromisso com a excelência.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center">
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className={`group relative glass rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-500 hover:transform hover:scale-105 animate-${stat.animation}`}
-              style={{
-                animationDuration: stat.duration,
-                animationIterationCount: "infinite",
-                animationTimingFunction: "ease-in-out",
-              }}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {STATS.map((stat, index) => (
+          <div
+            key={stat.label}
+            data-reveal="zoom"
+            style={{ transitionDelay: `${index * 140}ms` }}
+            className="p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center"
+          >
+            <span
+              className={`text-5xl lg:text-6xl font-extrabold tracking-tight mb-2 ${
+                stat.highlight ? "text-brand-700" : "text-slate-900"
+              }`}
             >
-              {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-              <div className="relative z-10 flex flex-col items-center justify-center">
-                <div className="text-4xl md:text-5xl font-bold text-gradient mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-white/70 text-base font-medium">
-                  {stat.label}
-                </div>
-              </div>
-
-              {/* Hover effect border */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
-            </div>
-          ))}
-        </div>
+              {stat.value}
+            </span>
+            <span className="text-base font-semibold text-slate-800">
+              {stat.label}
+            </span>
+            <span className="text-xs text-slate-400 mt-1 font-mono">
+              {stat.note}
+            </span>
+          </div>
+        ))}
       </div>
-
-      {/* Animações personalizadas */}
-      <style>{`
-        @keyframes floatX {
-          0% { transform: translateX(0); }
-          50% { transform: translateX(8px); }
-          100% { transform: translateX(0); }
-        }
-
-        @keyframes floatY {
-          0% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-          100% { transform: translateY(0); }
-        }
-
-        @keyframes floatXY {
-          0% { transform: translate(0, 0); }
-          50% { transform: translate(8px, -10px); }
-          100% { transform: translate(0, 0); }
-        }
-
-        .animate-floatX {
-          animation-name: floatX;
-        }
-
-        .animate-floatY {
-          animation-name: floatY;
-        }
-
-        .animate-floatXY {
-          animation-name: floatXY;
-        }
-
-        .text-gradient {
-          background: linear-gradient(90deg, #6a00ff, #00c3ff);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: transparent;
-        }
-
-        .bg-gradient-primary {
-          background: linear-gradient(90deg, #6a00ff 0%, #00c3ff 100%);
-        }
-      `}</style>
-    </section>
-  );
-};
+    </div>
+  </section>
+);

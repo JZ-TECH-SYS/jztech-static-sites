@@ -1,184 +1,127 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { MdArrowForward, MdClose, MdMenu } from "react-icons/md";
+
+const NAV_LINKS = [
+  { href: "#sobre", label: "Sobre nós" },
+  { href: "#servicos", label: "Serviços" },
+  { href: "#resultados", label: "Resultados" },
+  { href: "#projetos", label: "Projetos" },
+  { href: "#equipe", label: "Equipe" },
+  { href: "#contato", label: "Contato" },
+];
+
+/* logo-nova-96.png e a logo-nova.png redimensionada: a original tem 370KB,
+   pesado demais para um logo de 36px no topo de toda pagina */
+export const Wordmark = ({ className = "text-lg", logoClass = "w-9 h-9" }) => (
+  <span className="flex items-center gap-2.5">
+    <img
+      src="/img/logo-nova-96.png"
+      alt=""
+      aria-hidden="true"
+      className={`${logoClass} object-contain shrink-0`}
+    />
+    <span
+      className={`${className} font-bold tracking-tight text-slate-950 flex items-center gap-1`}
+    >
+      JZ <span className="text-slate-500 font-normal">TECH</span>
+    </span>
+  </span>
+);
 
 export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80; // Altura do navbar
-      const elementPosition = element.offsetTop - offset;
-
-      // Scroll suave mais fluido
-      const startPosition = window.pageYOffset;
-      const distance = elementPosition - startPosition;
-      const duration = Math.abs(distance) > 1000 ? 1200 : 800; // Duração baseada na distância
-      let start: number | null = null;
-
-      function animation(currentTime: number) {
-        if (start === null) start = currentTime;
-        const timeElapsed = currentTime - start;
-        const run = ease(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      }
-
-      // Função de easing para movimento mais suave
-      function ease(t: number, b: number, c: number, d: number): number {
-        t /= d / 2;
-        if (t < 1) return (c / 2) * t * t + b;
-        t--;
-        return (-c / 2) * (t * (t - 2) - 1) + b;
-      }
-
-      requestAnimationFrame(animation);
-
-      // Fechar menu mobile se estiver aberto
-      setIsMobileMenuOpen(false);
-    }
-  };
+  // trava o scroll do body enquanto o menu mobile esta aberto
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "glass-dark shadow-xl" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b transition-all duration-300 ${
+        isScrolled
+          ? "border-slate-200/80 shadow-sm shadow-slate-200/60"
+          : "border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 lg:w-12 lg:h-12 relative">
-              <div className="absolute inset-0 bg-gradient-primary rounded-lg rotate-45"></div>
-              <div className="absolute inset-1 bg-slate-900 rounded-lg rotate-45 flex items-center justify-center">
-                <span className="text-white font-bold text-lg lg:text-xl -rotate-45">
-                  JZ
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-col justify-center">
-              <h1 className="text-xl lg:text-2xl font-bold text-gradient leading-none -mb-1">
-                JZ-TECH
-              </h1>
-              <p className="text-[9px] lg:text-[10px] text-white/50 tracking-[0.2em] font-medium uppercase">
-                SOFTWARE DEVELOPMENT
-              </p>
-            </div>
-          </div>
+      <div
+        className={`max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between transition-all duration-300 ${
+          isScrolled ? "h-16" : "h-20"
+        }`}
+      >
+        <a
+          className="flex items-center focus:outline-none hover:opacity-80 transition-opacity"
+          href="#"
+          aria-label="JZ Tech — início"
+        >
+          <Wordmark className="text-lg" />
+        </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={() => scrollToSection("services")}
-              className="text-white/80 hover:text-white font-medium transition-all duration-300 hover:scale-105 hover:text-gradient relative group"
+        {/* Navegação desktop */}
+        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-600">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              className="relative py-1 transition-colors hover:text-brand-700 after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-brand-700 after:transition-transform after:duration-300 hover:after:scale-x-100"
+              href={link.href}
             >
-              Sobre nós
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="text-white/80 hover:text-white font-medium transition-all duration-300 hover:scale-105 hover:text-gradient relative group"
-            >
-              Projetos
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-            <button
-              onClick={() => scrollToSection("team")}
-              className="text-white/80 hover:text-white font-medium transition-all duration-300 hover:scale-105 hover:text-gradient relative group"
-            >
-              Equipe
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="btn-primary text-sm hover:scale-105 transition-all duration-300"
-            >
-              Contato
-            </button>
-          </nav>
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg glass transition-colors duration-200"
-            aria-label="Toggle mobile menu"
+        <div className="flex items-center gap-3">
+          <a
+            className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brand-700 text-white text-sm font-medium hover:bg-brand-800 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 group"
+            href="#contato"
           >
-            <div className="w-6 h-6 flex flex-col justify-center items-center">
-              <span
-                className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
-                  isMobileMenuOpen
-                    ? "rotate-45 translate-y-1"
-                    : "-translate-y-1"
-                }`}
-              />
-              <span
-                className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
-                  isMobileMenuOpen ? "opacity-0" : "opacity-100"
-                }`}
-              />
-              <span
-                className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
-                  isMobileMenuOpen
-                    ? "-rotate-45 -translate-y-1"
-                    : "translate-y-1"
-                }`}
-              />
-            </div>
+            <span>Contato</span>
+            <MdArrowForward className="text-base ml-1 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen((open) => !open)}
+            aria-expanded={isOpen}
+            aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+            className="lg:hidden w-10 h-10 rounded-lg border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:border-brand-500 hover:text-brand-700 active:scale-95 transition-all"
+          >
+            {isOpen ? <MdClose className="text-xl" /> : <MdMenu className="text-xl" />}
           </button>
         </div>
-
-        {/* Mobile Navigation */}
-        <div
-          className={`md:hidden transition-all duration-300 overflow-hidden ${
-            isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <nav className="py-4 space-y-3 glass-dark rounded-lg mt-2 mb-4">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="block w-full text-left px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200"
-            >
-              Sobre
-            </button>
-            <button
-              onClick={() => scrollToSection("services")}
-              className="block w-full text-left px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200"
-            >
-              Serviços
-            </button>
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="block w-full text-left px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200"
-            >
-              Projetos
-            </button>
-            <button
-              onClick={() => scrollToSection("team")}
-              className="block w-full text-left px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200"
-            >
-              Equipe
-            </button>
-            <div className="px-4 pt-2">
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="btn-primary w-full text-sm"
-              >
-                Contato
-              </button>
-            </div>
-          </nav>
-        </div>
       </div>
+
+      {/* Navegação mobile */}
+      <nav
+        className={`lg:hidden overflow-hidden border-slate-200/80 bg-white/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out ${
+          isOpen ? "max-h-96 opacity-100 border-t" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              tabIndex={isOpen ? 0 : -1}
+              onClick={() => setIsOpen(false)}
+              className="py-3 text-sm font-medium text-slate-700 border-b border-slate-100 last:border-0 hover:text-brand-700 hover:translate-x-1 transition-all duration-200"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </nav>
     </header>
   );
 };

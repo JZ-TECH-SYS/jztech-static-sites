@@ -1,174 +1,149 @@
+import type { ReactNode } from "react";
 import {
-  FaCode,
-  FaLaptopCode,
-  FaCogs,
-  FaMobile,
-  FaCloud,
-  FaShieldAlt,
-} from "react-icons/fa";
+  MdCloudQueue,
+  MdCode,
+  MdHub,
+  MdLanguage,
+  MdSmartphone,
+  MdVerifiedUser,
+} from "react-icons/md";
 
-export const AboutUsSection = () => {
-  const services = [
-    {
-      icon: <FaLaptopCode />,
-      title: "Websites Profissionais",
-      description:
-        "Sites modernos, responsivos e otimizados para conversão com foco na experiência do usuário.",
-      features: ["Design Responsivo", "SEO Otimizado", "Performance"],
-    },
-    {
-      icon: <FaCode />,
-      title: "Sistemas Sob Medida",
-      description:
-        "Desenvolvimento de sistemas completos para gestão, vendas e operações empresariais.",
-      features: [
-        "Arquitetura Escalável",
-        "Interface Intuitiva",
-        "Suporte Técnico",
-      ],
-    },
-    {
-      icon: <FaCogs />,
-      title: "Integrações e APIs",
-      description:
-        "Conectamos sua empresa com ERPs, marketplaces e outras plataformas essenciais.",
-      features: ["APIs RESTful", "Webhooks", "Sincronização"],
-    },
-    {
-      icon: <FaMobile />,
-      title: "Apps Mobile",
-      description:
-        "Aplicativos nativos e híbridos para iOS e Android com excelente performance.",
-      features: ["React Native", "Flutter", "PWA"],
-    },
-    {
-      icon: <FaCloud />,
-      title: "Cloud & DevOps",
-      description:
-        "Infraestrutura em nuvem, CI/CD e monitoramento para máxima disponibilidade.",
-      features: ["AWS/Azure", "Docker", "Kubernetes"],
-    },
-    {
-      icon: <FaShieldAlt />,
-      title: "Segurança Digital",
-      description:
-        "Implementação de melhores práticas de segurança e proteção de dados.",
-      features: ["LGPD", "SSL/TLS", "Backup"],
-    },
-  ];
+type Service = {
+  icon: ReactNode;
+  /* classes completas: o Tailwind so gera o que aparece literal no codigo */
+  iconClass: string;
+  title: string;
+  description: string;
+  features: string[];
+};
 
-  return (
-    <section id="about" className="relative py-24 bg-slate-900 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl"></div>
+const SERVICES: Service[] = [
+  {
+    icon: <MdLanguage className="text-2xl" />,
+    iconClass:
+      "bg-brand-50 border-brand-100 text-brand-700 group-hover:bg-brand-700 group-hover:text-white",
+    title: "Websites Profissionais",
+    description:
+      "Sites modernos, responsivos e otimizados para conversão com foco na experiência do usuário.",
+    features: ["Design Responsivo", "SEO Otimizado", "Performance"],
+  },
+  {
+    icon: <MdCode className="text-2xl" />,
+    iconClass:
+      "bg-indigo-50 border-indigo-100 text-indigo-700 group-hover:bg-indigo-600 group-hover:text-white",
+    title: "Sistemas Sob Medida",
+    description:
+      "Desenvolvimento de sistemas completos para gestão, vendas e operações empresariais.",
+    features: ["Arquitetura Escalável", "Interface Intuitiva", "Suporte Técnico"],
+  },
+  {
+    icon: <MdHub className="text-2xl" />,
+    iconClass:
+      "bg-cyan-50 border-cyan-100 text-cyan-700 group-hover:bg-cyan-600 group-hover:text-white",
+    title: "Integrações e APIs",
+    description:
+      "Conectamos sua empresa com ERPs, marketplaces e outras plataformas essenciais.",
+    features: ["APIs RESTful", "Webhooks", "Sincronização"],
+  },
+  {
+    icon: <MdSmartphone className="text-2xl" />,
+    iconClass:
+      "bg-blue-50 border-blue-100 text-blue-700 group-hover:bg-blue-600 group-hover:text-white",
+    title: "Apps Mobile",
+    description:
+      "Aplicativos nativos e híbridos para iOS e Android com excelente performance.",
+    features: ["React Native", "Flutter", "PWA"],
+  },
+  {
+    icon: <MdCloudQueue className="text-2xl" />,
+    iconClass:
+      "bg-sky-50 border-sky-100 text-sky-700 group-hover:bg-sky-600 group-hover:text-white",
+    title: "Cloud & DevOps",
+    description:
+      "Infraestrutura em nuvem, CI/CD e monitoramento para máxima disponibilidade.",
+    features: ["AWS/Azure", "Docker", "Kubernetes"],
+  },
+  {
+    icon: <MdVerifiedUser className="text-2xl" />,
+    iconClass:
+      "bg-violet-50 border-violet-100 text-violet-700 group-hover:bg-violet-600 group-hover:text-white",
+    title: "Segurança Digital",
+    description:
+      "Implementação de melhores práticas de segurança e proteção de dados.",
+    features: ["LGPD", "SSL/TLS", "Backup"],
+  },
+];
+
+export const AboutUsSection = () => (
+  <section className="py-24 bg-white border-b border-slate-200/60" id="servicos">
+    <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div data-reveal className="text-center max-w-3xl mx-auto mb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200/60 text-brand-700 text-xs font-semibold uppercase tracking-wider mb-3">
+          Nossos Serviços
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 mb-4">
+          Soluções Digitais Completas
+        </h2>
+        <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+          Transformamos ideias em realidade digital através de tecnologias
+          modernas e metodologias ágeis. Nossa expertise abrange todo o ciclo de
+          desenvolvimento de software.
+        </p>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 rounded-full glass border border-white/20 text-sm font-medium text-white/90 mb-6">
-            <FaCode className="mr-2" />
-            Nossos Serviços
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {SERVICES.map((service, index) => (
+          <div
+            key={service.title}
+            data-reveal
+            style={{ transitionDelay: `${(index % 3) * 120}ms` }}
+            className="group p-8 rounded-2xl bg-[#FAFAFA] border border-slate-200/80 hover:border-brand-500/40 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          >
+            <div>
+              <div
+                className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 ${service.iconClass}`}
+              >
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-bold text-slate-950 mb-3">
+                {service.title}
+              </h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                {service.description}
+              </p>
+            </div>
+            <div className="pt-5 border-t border-slate-200/80 flex flex-wrap gap-2 text-xs font-medium text-slate-600">
+              {service.features.map((feature) => (
+                <span
+                  key={feature}
+                  className="px-2.5 py-1 rounded-md bg-white border border-slate-200"
+                >
+                  {feature}
+                </span>
+              ))}
+            </div>
           </div>
+        ))}
+      </div>
 
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-            <span className="text-white">Soluções </span>
-            <span className="text-gradient">Digitais Completas</span>
-          </h2>
-
-          <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-            Transformamos ideias em realidade digital através de tecnologias
-            modernas e metodologias ágeis. Nossa expertise abrange todo o ciclo
-            de desenvolvimento de software.
+      {/* Callout intermediário */}
+      <div data-reveal="zoom" className="mt-16 rounded-2xl bg-gradient-to-r from-brand-700 via-brand-800 to-slate-900 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="max-w-2xl text-center md:text-left">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
+            Pronto para começar seu projeto?
+          </h3>
+          <p className="text-brand-100 text-sm sm:text-base">
+            Entre em contato conosco e vamos transformar sua ideia em realidade
+            digital.
           </p>
         </div>
-
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="group relative glass rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-all duration-500 hover:transform hover:scale-105"
-            >
-              {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-              <div className="relative z-10">
-                {/* Icon */}
-                <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-2xl bg-gradient-primary text-white text-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                  {service.icon}
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-gradient transition-colors duration-300">
-                  {service.title}
-                </h3>
-
-                <p className="text-white/70 mb-6 leading-relaxed">
-                  {service.description}
-                </p>
-
-                {/* Features */}
-                <div className="space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center text-sm text-white/60"
-                    >
-                      <div className="w-1.5 h-1.5 bg-gradient-primary rounded-full mr-3"></div>
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Hover effect border */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
-            </div>
-          ))}
-        </div>
-
-        {/* Stats Section
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { number: "15+", label: "Projetos Entregues" },
-            { number: "3+", label: "Anos de Experiência" },
-            { number: "100%", label: "Dedicação" },
-            { number: "24/7", label: "Suporte Técnico" },
-          ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">
-                {stat.number}
-              </div>
-              <div className="text-white/60 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div> */}
-
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="glass rounded-2xl p-8 border border-white/20 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Pronto para começar seu projeto?
-            </h3>
-            <p className="text-white/70 mb-6">
-              Entre em contato conosco e vamos transformar sua ideia em
-              realidade digital.
-            </p>
-            <button
-              onClick={() => {
-                const element = document.getElementById("contact");
-                if (element) element.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="btn-primary"
-            >
-              Falar com Especialista
-            </button>
-          </div>
-        </div>
+        <a
+          className="px-6 py-3.5 rounded-xl bg-white text-brand-800 font-semibold text-sm hover:bg-brand-50 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 shrink-0"
+          href="#contato"
+        >
+          Falar com Especialista
+        </a>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
