@@ -23,7 +23,7 @@ const TEAM = [
     whatsapp: "5518997086342",
   },
   {
-    name: "Gabriel S. Silva",
+    name: "Gabriel dos Santos S.",
     role: "Desenvolvedor de Software",
     image: "/img/gabriel.jpeg",
     linkedin: "https://www.linkedin.com/in/gabriel-dos-santos-silva-005a19213",
