@@ -22,6 +22,13 @@ const TEAM = [
     linkedin: "https://www.linkedin.com/in/jean-felipe123/",
     whatsapp: "5518997086342",
   },
+  {
+    name: "Gabriel S. Silva",
+    role: "Desenvolvedor de Software",
+    image: "/img/gabriel.jpeg",
+    linkedin: "https://www.linkedin.com/in/gabriel-dos-santos-silva-005a19213",
+    whatsapp: "5544988248507",
+  },
 ];
 
 const whatsappLink = (phone: string, name: string) =>
@@ -45,7 +52,7 @@ export const TeamSection = () => (
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
         {TEAM.map((member, index) => (
           <div
             key={member.name}
