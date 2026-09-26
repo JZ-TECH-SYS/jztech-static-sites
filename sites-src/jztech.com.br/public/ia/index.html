@@ -44,7 +44,7 @@ html{scroll-behavior:smooth;scroll-padding-top:72px}
 .topo.rolou{background:#05070cd9;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:#151c29}
 .menu{display:flex;gap:10px;position:absolute;left:50%;transform:translateX(-50%);}
 .topo{padding-left:max(clamp(16px,4vw,40px),calc((100% - 1280px)/2 + 40px));padding-right:max(clamp(16px,4vw,40px),calc((100% - 1280px)/2 + 40px))}
-.menu a{position:relative;white-space:nowrap;text-decoration:none;color:var(--texto-2);font-size:14px;font-weight:500;padding:8px 16px;border-radius:999px;transition:color .25s,background .25s}
+.menu a{position:relative;white-space:nowrap;text-decoration:none;color:var(--texto-2);font-size:15.5px;font-weight:500;padding:8px 16px;border-radius:999px;transition:color .25s,background .25s}
 .menu a::after{content:"";position:absolute;left:16px;right:16px;bottom:3px;height:2px;border-radius:2px;background:var(--luz);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .menu a:hover{color:var(--texto);background:#ffffff0d}
 .menu a:hover::after{transform:scaleX(.5)}
@@ -76,13 +76,13 @@ body.menu-aberto .menu-m{transform:none;visibility:visible}
 .menu-m a{font-size:clamp(1.25rem,5.2vw,1.6rem);font-weight:700;letter-spacing:-.03em;color:var(--texto);text-decoration:none;padding:8px 0;opacity:0;transform:translateY(16px);transition:opacity .45s,transform .5s cubic-bezier(.2,.8,.2,1),color .25s}
 .menu-m a:hover,.menu-m a:focus-visible{color:#04C7FC}
 .menu-m a:not(.menu-m-zap){position:relative;padding-left:16px}
-.menu-m a:not(.menu-m-zap)::before{content:"";position:absolute;left:0;top:50%;width:3px;height:0;border-radius:3px;background:#04C7FC;transform:translateY(-50%);transition:height .35s cubic-bezier(.2,.8,.2,1)}
-.menu-m a.ativo{color:#04C7FC}
+.menu-m a:not(.menu-m-zap)::before{content:"";position:absolute;left:0;top:50%;width:3px;height:0;border-radius:3px;background:var(--luz,#04C7FC);transform:translateY(-50%);transition:height .35s cubic-bezier(.2,.8,.2,1)}
+.menu-m a.ativo{color:var(--luz,#04C7FC);transition:color .5s}
 .menu-m a.ativo::before{height:60%}
 body.menu-aberto .menu-m a{opacity:1;transform:none}
 body.menu-aberto .menu-m a:nth-child(2){transition-delay:.05s}body.menu-aberto .menu-m a:nth-child(3){transition-delay:.1s}
 body.menu-aberto .menu-m a:nth-child(4){transition-delay:.15s}body.menu-aberto .menu-m a:nth-child(5){transition-delay:.2s}body.menu-aberto .menu-m a:nth-child(6){transition-delay:.25s}body.menu-aberto .menu-m a:nth-child(7){transition-delay:.3s}
-.menu-m .menu-m-zap{margin-top:22px;display:flex;justify-content:center;align-items:center;gap:8px;align-self:stretch;padding:13px 10px !important;font-size:14px;white-space:nowrap;letter-spacing:0;background:var(--verde);color:#04160b;border-radius:999px;padding:14px 24px}
+.menu-m .menu-m-zap{background:var(--zap,var(--verde)) !important;transition:background .5s;margin-top:22px;display:flex;justify-content:center;align-items:center;gap:8px;align-self:stretch;padding:13px 10px !important;font-size:15.5px;white-space:nowrap;letter-spacing:0;background:var(--verde);color:#04160b;border-radius:999px;padding:14px 24px}
 .menu-m .menu-m-zap:hover{color:#04160b}
 .menu-m-zap svg{width:18px;height:18px;flex:none}
 /* WhatsApp flutuante do celular, em cima do botão de subir */
@@ -102,7 +102,7 @@ body.menu-aberto .zap-flut,body.menu-aberto .subir{opacity:0;transform:translate
 .subir svg{width:18px;height:18px}
 @media (max-width:1240px){.menu{display:none}}
 .btn-pausa{display:flex;align-items:center;gap:8px;background:#ffffff0d;border:1px solid #ffffff1f;color:var(--texto-2);
-  border-radius:999px;padding:8px 14px;font:500 13px Geist,sans-serif;cursor:pointer}
+  border-radius:999px;padding:8px 14px;font:500 14.5px Geist,sans-serif;cursor:pointer}
 .btn-pausa:hover{color:var(--texto);background:#ffffff17}
 .btn-pausa svg{width:14px;height:14px}
 .zap{display:inline-flex;align-items:center;gap:10px;background:var(--verde);color:#04160b;text-decoration:none;border:0;cursor:pointer;
@@ -110,7 +110,7 @@ body.menu-aberto .zap-flut,body.menu-aberto .subir{opacity:0;transform:translate
 .zap:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px #25d366cc}
 .zap:active{transform:translateY(0) scale(.98)}
 .zap svg{width:20px;height:20px;flex:none}
-.zap.pequeno{padding:9px 16px;font-size:13px}
+.zap.pequeno{padding:9px 16px;font-size:14.5px}
 .zap.pequeno svg{width:16px;height:16px}
 
 /* palco */
@@ -133,8 +133,11 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;transition
 .copy h1 .nome{display:block;font-weight:800;color:var(--luz);transition:color .4s;margin-bottom:.12em}
 .copy p{margin-top:22px;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.55;color:var(--texto-2);max-width:34rem;text-wrap:pretty}
 .acoes{display:flex;align-items:center;gap:22px;margin-top:32px;flex-wrap:wrap}
-.rolar{display:inline-flex;align-items:center;gap:8px;color:var(--texto-2);font-size:14px;text-decoration:none}
-.rolar svg{width:16px;height:16px;animation:desce 1.8s cubic-bezier(.5,0,.3,1) infinite}
+.rolar{display:inline-flex;align-items:center;gap:8px;color:var(--texto-2);font-size:15.5px;text-decoration:none}
+.ato-itens{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px}
+.ato-itens li{display:flex;align-items:center;gap:10px;color:#cdd6e4;font-size:15.5px}
+.ato-itens li::before{content:"";width:7px;height:7px;border-radius:50%;flex:none;background:var(--luz);box-shadow:0 0 10px var(--luz);transition:background .5s,box-shadow .5s}
+.rolar svg{color:var(--luz);transition:color .5s;width:16px;height:16px;animation:desce 1.8s cubic-bezier(.5,0,.3,1) infinite}
 @keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 .ato{transition:opacity .5s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1),filter .5s}
 .ato[hidden]{display:block;opacity:0;transform:translateY(18px);filter:blur(6px);pointer-events:none;position:absolute;inset:auto 0 0 0;visibility:hidden}
@@ -146,10 +149,10 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;transition
 .progresso{position:absolute;left:0;top:0;height:2px;width:100%;z-index:21;pointer-events:none}
 .progresso i{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(var(--p,0));background:var(--luz)}
 
-.selo{position:fixed;left:14px;bottom:12px;z-index:30;font:500 11px Geist,sans-serif;letter-spacing:.02em;color:#8795aa;background:#0b0f18e6;
+.selo{position:fixed;left:14px;bottom:12px;z-index:30;font:500 13px Geist,sans-serif;letter-spacing:.02em;color:#8795aa;background:#0b0f18e6;
   border:1px solid #1d2636;border-radius:999px;padding:6px 10px}
 .aviso{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;z-index:40;background:#101826;border:1px solid #273349;
-  color:var(--texto);padding:12px 18px;border-radius:12px;font-size:14px;box-shadow:0 18px 40px -16px #000;transition:.35s cubic-bezier(.2,.8,.2,1);max-width:calc(100% - 32px)}
+  color:var(--texto);padding:12px 18px;border-radius:12px;font-size:15.5px;box-shadow:0 18px 40px -16px #000;transition:.35s cubic-bezier(.2,.8,.2,1);max-width:calc(100% - 32px)}
 .aviso.on{opacity:1;transform:translate(-50%,0)}
 
 .depois{position:relative;min-height:80vh;display:grid;place-items:center;text-align:center;padding:80px 20px;background:var(--fundo)}
@@ -159,6 +162,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;transition
 body.parado .faixa{transition:none}
 body.parado .rolar svg{animation:none}
 
+@media (max-width:760px) and (max-height:720px){.ato-itens{display:none}}
 @media (max-width:760px){
   .copy{left:16px;right:16px;bottom:28px;max-width:none}
   .copy h1,.copy h2{font-size:clamp(1.9rem,8.4vw,2.6rem)}
@@ -168,7 +172,9 @@ body.parado .rolar svg{animation:none}
   .marca{white-space:nowrap}
   .topo .zap{padding:9px}
   .selo{bottom:auto;top:62px;left:16px}
-  .rolar{display:none}
+  .acoes{justify-content:center}
+  .rolar{display:inline-flex}
+  .ato-itens li{font-size:14.5px}
   .btn-pausa span,.topo .zap span{display:none}
   .btn-pausa{padding:9px}
   .coluna-luz{--cx:50%;top:-20%;bottom:45%}
@@ -193,14 +199,14 @@ body.parado .revela{opacity:1;transform:none;filter:none;transition:none}
 .trilho::-webkit-scrollbar{display:none}
 .cartao{flex:0 0 calc((100% - 36px) / 3);scroll-snap-align:start;background:linear-gradient(180deg,#0e1522,#0a0f18);border:1px solid #1c2638;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px;animation:entra .6s cubic-bezier(.2,.8,.2,1) backwards}
 @keyframes entra{from{opacity:0;transform:translateX(30px)}}
-.cartao .et{font-size:12px;color:var(--texto-2);display:flex;align-items:center;gap:8px}
+.cartao .et{font-size:13.5px;color:var(--texto-2);display:flex;align-items:center;gap:8px}
 .cartao h3{font-size:1.25rem;letter-spacing:-.02em;line-height:1.25}
 .cartao .antes{color:#8290a6;font-size:.95rem;line-height:1.5}
 .cartao .depois-t{color:#cfe9ff;font-size:.95rem;line-height:1.5}
-.cartao .antes b,.cartao .depois-t b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;opacity:.7}
-.cartao .quero{margin-top:auto;align-self:flex-start;background:none;border:0;color:var(--verde);font:600 14px Geist,sans-serif;cursor:pointer;padding:6px 0}
+.cartao .antes b,.cartao .depois-t b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;opacity:.7}
+.cartao .quero{margin-top:auto;align-self:flex-start;background:none;border:0;color:var(--verde);font:600 15.5px Geist,sans-serif;cursor:pointer;padding:6px 0}
 .cartao .quero:hover{text-decoration:underline;text-underline-offset:4px}
-.passo-c .num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;color:#04C7FC;border:1px solid #04C7FC66;background:#04c7fc12}
+.passo-c .num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15.5px;color:#04C7FC;border:1px solid #04C7FC66;background:#04c7fc12}
 .passo-c .depois-t{color:var(--texto-2)}
 .cartao.aberto{background:linear-gradient(180deg,#0f2418,#0a1510);border-color:#1f4a31}
 .cartao textarea,.caixa textarea{width:100%;background:#05070c;border:1px solid #2a3446;border-radius:12px;color:var(--texto);font:15px/1.5 Geist,sans-serif;padding:12px;resize:none}
@@ -208,7 +214,7 @@ body.parado .revela{opacity:1;transform:none;filter:none;transition:none}
 .sl{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid #7fb4ff;vertical-align:middle;flex:none}
 .sl.on{background:#25D366;border-color:#25D366;box-shadow:0 0 0 3px #25d36633}
 .sl.meio{background:linear-gradient(90deg,#FFB547 50%,transparent 50%);border-color:#FFB547}
-.legenda{color:var(--texto-2);font-size:13px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.legenda{color:var(--texto-2);font-size:14.5px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px}
 .legenda .sl{margin-left:10px}
 .setas{display:flex;gap:8px;justify-content:flex-end;margin-bottom:12px}
 .pontos{display:flex;justify-content:center;gap:8px;margin:6px 0 18px}
@@ -221,9 +227,9 @@ body.parado .revela{opacity:1;transform:none;filter:none;transition:none}
 .cel{background:#0b141a;border:1px solid #1f2c34;border-radius:28px;padding:12px;box-shadow:0 30px 80px -30px #000;height:560px;display:flex;flex-direction:column}
 .cel-topo{display:flex;gap:10px;align-items:center;padding:8px 8px 12px;border-bottom:1px solid #1f2c34}
 .cel-topo .av{width:36px;height:36px;border-radius:50%;background:#25D366;color:#04160b;display:grid;place-items:center;font-weight:800}
-.cel-topo b{display:block;font-size:14px}.cel-topo small{font-size:12px;color:#8aa0ad}
+.cel-topo b{display:block;font-size:15.5px}.cel-topo small{font-size:13.5px;color:#8aa0ad}
 .chat{flex:1;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 4px 4px}
-.msg{max-width:82%;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.4;animation:pop .35s cubic-bezier(.2,.8,.2,1)}
+.msg{max-width:82%;padding:9px 12px;border-radius:12px;font-size:15.5px;line-height:1.4;animation:pop .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}}
 .msg.cli{align-self:flex-end;background:#005c4b;border-bottom-right-radius:4px}
 .msg.ia{align-self:flex-start;background:#1f2c34;border-bottom-left-radius:4px}
@@ -241,12 +247,12 @@ body.parado .revela{opacity:1;transform:none;filter:none;transition:none}
 .bastidor h3{font-size:1.1rem;margin-bottom:18px}
 .bastidor ol{list-style:none;padding:0;display:grid;gap:10px;counter-reset:p}
 #passos li{display:flex;gap:12px;align-items:center;color:#56637a;font-size:15px;transition:color .4s}
-#passos li::before{counter-increment:p;content:counter(p);width:26px;height:26px;border-radius:50%;border:1px solid #2a3446;display:grid;place-items:center;font-size:12px;flex:none;transition:.4s}
+#passos li::before{counter-increment:p;content:counter(p);width:26px;height:26px;border-radius:50%;border:1px solid #2a3446;display:grid;place-items:center;font-size:13.5px;flex:none;transition:.4s}
 #passos li.on{color:var(--texto)}
 #passos li.on::before{content:"✓";background:#04C7FC22;border-color:#04C7FC;color:#04C7FC}
-.cozinha{margin-top:22px;border:1px dashed #2a3446;border-radius:12px;padding:14px;color:#56637a;font-size:14px;display:grid;gap:4px;transition:.5s}
+.cozinha{margin-top:22px;border:1px dashed #2a3446;border-radius:12px;padding:14px;color:#56637a;font-size:15.5px;display:grid;gap:4px;transition:.5s}
 .coz-topo{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:26px}
-.coz-topo em{font-style:normal;font-size:12px;padding:3px 10px;border-radius:999px;background:#ffffff0d;color:#8290a6;transition:.4s}
+.coz-topo em{font-style:normal;font-size:13.5px;padding:3px 10px;border-radius:999px;background:#ffffff0d;color:#8290a6;transition:.4s}
 .cozinha.on .coz-topo em{background:#25D366;color:#04160b;font-weight:700}
 .cozinha.montando{border-style:solid;border-color:#04C7FC55;color:var(--texto)}
 #coz-itens{list-style:none;padding:0;margin:0;display:grid;gap:4px;align-content:start;min-height:132px}
@@ -254,10 +260,10 @@ body.parado .revela{opacity:1;transform:none;filter:none;transition:none}
 #coz-itens li span:last-child{color:var(--texto-2);white-space:nowrap}
 #coz-itens li.total{border-top:1px solid #ffffff14;padding-top:6px;margin-top:2px;font-weight:700}
 .cozinha.on{border-style:solid;border-color:#25D366;color:var(--texto);background:#25d36612;box-shadow:0 10px 40px -20px #25D366}
-.rever{margin-top:16px;background:none;border:1px solid #2a3446;color:var(--texto-2);border-radius:999px;padding:8px 16px;cursor:pointer;font:500 13px Geist,sans-serif}
+.rever{margin-top:16px;background:none;border:1px solid #2a3446;color:var(--texto-2);border-radius:999px;padding:8px 16px;cursor:pointer;font:500 14.5px Geist,sans-serif}
 .chat .msg{transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1),filter .7s}
 .chat.saindo .msg{opacity:0;transform:translateY(-14px);filter:blur(4px)}
-.nota{margin-top:18px;font-size:13px;color:#7a879b}
+.nota{margin-top:18px;font-size:14.5px;color:#7a879b}
 .faixas{display:grid;gap:10px;overflow:hidden;padding:10px 0 18px;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .pilulas{display:flex;gap:12px;width:max-content;animation:anda 60s linear infinite}
 .pilulas[data-sentido="-1"]{animation-direction:reverse}
@@ -300,29 +306,29 @@ body.parado .passos::before,body.parado .passo::before,body.parado .passo b,body
 .sis:hover{border-color:#04C7FC;transform:translateY(-3px)}
 .sis b{font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
 .sis b svg{width:14px;height:14px;color:var(--texto-2)}
-.sis span{color:var(--texto-2);font-size:14px;line-height:1.45}
+.sis span{color:var(--texto-2);font-size:15.5px;line-height:1.45}
 .sub{margin:64px 0 22px;font-size:1.3rem;letter-spacing:-.02em}
 .clientes{display:grid;gap:14px}
 .grupo{padding:22px 24px;border-radius:16px;background:#0a0f18;border:1px solid #1c2638}
 .grupo-cab{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-.grupo-cab b{font-size:1.05rem}.grupo-cab span{font-size:13px;color:var(--texto-2)}
+.grupo-cab b{font-size:1.05rem}.grupo-cab span{font-size:14.5px;color:var(--texto-2)}
 .logos{display:flex;flex-wrap:wrap;gap:10px}
-.cli{display:inline-flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:999px;background:#0e1522;border:1px solid #1f2a3d;font-size:14px;font-weight:500;transition:border-color .25s,color .25s,transform .25s cubic-bezier(.2,.8,.2,1)}
+.cli{display:inline-flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:999px;background:#0e1522;border:1px solid #1f2a3d;font-size:15.5px;font-weight:500;transition:border-color .25s,color .25s,transform .25s cubic-bezier(.2,.8,.2,1)}
 .cli{text-decoration:none;color:var(--texto)}
 .cli .ext{width:12px;height:12px;opacity:.5;margin-left:-2px;transition:opacity .25s,transform .25s}
 a.cli:hover .ext{opacity:1;transform:translate(2px,-2px)}
 span.cli{cursor:default}
 .cli:hover{border-color:#04C7FC;color:#04C7FC;transform:translateY(-2px)}
 .cli img,.cli i{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none}
-.cli i{display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;color:#04C7FC;background:#04c7fc18;border:1px solid #04c7fc40}
+.cli i{display:grid;place-items:center;font-style:normal;font-size:13.5px;font-weight:700;color:#04C7FC;background:#04c7fc18;border:1px solid #04c7fc40}
 .depos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .depo{padding:24px;border-radius:16px;background:#0a0f18;border:1px solid #1c2638;display:flex;flex-direction:column;gap:14px}
 .depo q{font-size:1.02rem;line-height:1.6;color:#d8e1ee}
 .depo a{display:flex;gap:12px;align-items:center;text-decoration:none;margin-top:auto}
 .depo img{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#1c2638}
-.depo a b{display:block;font-size:15px}.depo a small{color:var(--texto-2);font-size:13px}
+.depo a b{display:block;font-size:15px}.depo a small{color:var(--texto-2);font-size:14.5px}
 .depo a:hover small{color:var(--verde)}
-.depo .tag{font-size:11px;color:#7a879b;letter-spacing:.04em}
+.depo .tag{font-size:13px;color:#7a879b;letter-spacing:.04em}
 .faq{max-width:52rem;display:grid;gap:10px}
 .faq details{border:1px solid #1c2638;border-radius:14px;background:#0a0f18;padding:0 22px}
 .faq summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:600;font-size:1.05rem;display:flex;justify-content:space-between;gap:16px}
@@ -331,7 +337,7 @@ span.cli{cursor:default}
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq p{padding:0 0 20px;color:var(--texto-2);line-height:1.6}
 .faq details{overflow:hidden;transition:border-color .3s,background .3s,transform .3s cubic-bezier(.2,.8,.2,1)}
-.faq details:hover{border-color:#04c7fc66;background:#0c1422;transform:translateX(4px)}
+@media (hover:hover){.faq details:hover{border-color:#04c7fc66;background:#0c1422;transform:translateX(4px)}}
 .faq details[open]{border-color:#04c7fc55;background:#0c1422}
 .faq summary{transition:color .25s}
 .faq details:hover summary,.faq details[open] summary{color:#04C7FC}
@@ -343,25 +349,25 @@ span.cli{cursor:default}
 .final>p{color:var(--texto-2);margin:18px auto 0;font-size:1.1rem;max-width:36rem;line-height:1.6}
 .caixa{margin-top:34px;display:grid;gap:14px;text-align:left}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
-.chips button{background:#ffffff0a;border:1px solid #ffffff1a;color:var(--texto-2);border-radius:999px;padding:8px 14px;cursor:pointer;font:500 13px Geist,sans-serif}
+.chips button{background:#ffffff0a;border:1px solid #ffffff1a;color:var(--texto-2);border-radius:999px;padding:8px 14px;cursor:pointer;font:500 14.5px Geist,sans-serif}
 .chips button:hover{color:var(--texto);border-color:var(--verde)}
 .caixa .zap{justify-self:center}
 .numeros{max-width:1280px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(16px,6vw,96px);display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #151c29;border-bottom:1px solid #151c29}
 .numeros div{text-align:center;padding:10px 12px;position:relative}
 .numeros div+div::before{content:"";position:absolute;left:0;top:18%;bottom:18%;width:1px;background:#1c2638}
 .numeros b{display:block;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--texto)}
-.numeros span{display:block;margin-top:10px;color:var(--texto-2);font-size:14px}
-.rodape{border-top:1px solid #151c29;background:#04060a;padding:clamp(48px,7vw,72px) clamp(16px,6vw,96px) 28px;color:#7d8aa0;font-size:14px}
+.numeros span{display:block;margin-top:10px;color:var(--texto-2);font-size:15.5px}
+.rodape{border-top:1px solid #151c29;background:#04060a;padding:clamp(48px,7vw,72px) clamp(16px,6vw,96px) 28px;color:#7d8aa0;font-size:15.5px}
 .rod-grade{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
 .rod-marca p{margin-top:16px;max-width:22rem;line-height:1.65}
-.rodape h4{color:var(--texto);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.rodape h4{color:var(--texto);font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
 .rod-grade>div>a{display:flex;align-items:center;gap:8px;width:fit-content;color:#7d8aa0;text-decoration:none;padding:5px 0;transition:color .2s,transform .25s cubic-bezier(.2,.8,.2,1)}
 .rod-grade>div>a:hover{color:var(--texto);transform:translateX(5px)}
 .rod-grade svg{width:16px;height:16px}
 .rod-marca .marca{color:var(--texto)}.rod-marca .marca img{width:28px}
 .rodape .rod-zap:hover{color:var(--verde)}
 .rodape .rod-insta:hover{color:#E1306C}
-.rod-base{max-width:1280px;margin:40px auto 0;padding-top:22px;border-top:1px solid #151c29;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
+.rod-base{max-width:1280px;margin:40px auto 0;padding-top:22px;border-top:1px solid #151c29;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:14.5px}
 .rod-base a{color:#9aa7ba;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .2s}
 .rod-base a svg{width:13px;height:13px;transition:transform .25s}
 .rod-base a:hover{color:var(--texto)}.rod-base a:hover svg{transform:translateX(4px)}
@@ -372,7 +378,7 @@ span.cli{cursor:default}
 }
 @media (max-width:760px){
   .abas{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .abas button{padding:11px 8px;font-size:13.5px;line-height:1.25;text-align:center}
+  .abas button{padding:11px 8px;font-size:15px;line-height:1.25;text-align:center}
   .abas button:first-child{grid-column:1/-1}
 }
 @media (min-width:761px) and (max-width:1023px) and (orientation:portrait){
@@ -386,30 +392,31 @@ span.cli{cursor:default}
 #agentes{max-width:1360px}
 .ag-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:48px;align-items:center}
 .ag-cab{margin-bottom:0}
+.ag-selo{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;font-size:13px;font-weight:600;color:#9cc4ff}
 .ag-tarefas{margin-top:14px;padding:14px 16px;border:1px solid #1c2638;border-radius:14px;background:#0a0f18;height:132px;overflow:hidden}
-.ag-tarefas b{display:block;font-size:13px;font-weight:600;color:#04C7FC;transition:color .3s;margin-bottom:10px}
+.ag-tarefas b{display:block;font-size:14.5px;font-weight:600;color:#04C7FC;transition:color .3s;margin-bottom:10px}
 #ag-tar-lista{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
-#ag-tar-lista li{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid #243044;color:#56637a;font-size:13px;animation:pop .35s cubic-bezier(.2,.8,.2,1) backwards;transition:color .3s,border-color .3s,background .3s}
+#ag-tar-lista li{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid #243044;color:#56637a;font-size:14.5px;animation:pop .35s cubic-bezier(.2,.8,.2,1) backwards;transition:color .3s,border-color .3s,background .3s}
 #ag-tar-lista li::before{content:"";width:8px;height:8px;border-radius:50%;background:#2a3446;flex:none;transition:.3s}
 #ag-tar-lista li.on{color:var(--texto);border-color:#04C7FC88;background:#0c1a26}
 #ag-tar-lista li.on::before{background:#04C7FC;box-shadow:0 0 8px #04C7FC}
 #ag-tar-lista li.am{color:#FFB547;border-color:#FFB54788;background:#1f170a}
 #ag-tar-lista li.am::before{background:#FFB547;box-shadow:0 0 8px #FFB547}
 #ag-tar-lista li.ok{color:#cfe3d6;border-color:#25d36666}
-#ag-tar-lista li.ok::before{content:"✓";width:auto;height:auto;background:none;box-shadow:none;color:#25D366;font-weight:700;font-size:12px}
-@media (max-width:760px){.ag-tarefas{height:196px}.ag-ganho{height:3em}#ag-tar-lista li{font-size:12.5px}}
+#ag-tar-lista li.ok::before{content:"✓";width:auto;height:auto;background:none;box-shadow:none;color:#25D366;font-weight:700;font-size:13.5px}
+@media (max-width:760px){.ag-tarefas{height:196px}.ag-ganho{height:3em}#ag-tar-lista li{font-size:14px}}
 .ag-passos{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;counter-reset:ps}
-.ag-passos li{counter-increment:ps;position:relative;padding:12px 12px 12px 42px;border-radius:12px;border:1px solid #1c2638;background:#0a0f18;color:#64728a;font-size:14px;font-weight:500;line-height:1.3;transition:color .35s,border-color .35s,background .35s}
-.ag-passos li::before{content:counter(ps);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;border:1px solid #2a3446;transition:.35s}
+.ag-passos li{counter-increment:ps;position:relative;padding:12px 12px 12px 42px;border-radius:12px;border:1px solid #1c2638;background:#0a0f18;color:#64728a;font-size:15.5px;font-weight:500;line-height:1.3;transition:color .35s,border-color .35s,background .35s}
+.ag-passos li::before{content:counter(ps);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:13.5px;font-weight:700;border:1px solid #2a3446;transition:.35s}
 .ag-passos li.on{color:var(--texto);border-color:#04C7FC88;background:#0c1a26}
 .ag-passos li.on::before{background:#04C7FC;border-color:#04C7FC;color:#04121a}
 .ag-passos li.ok{color:#b9c6d6}
 .ag-passos li.ok::before{content:"✓";background:#25d36622;border-color:#25D366;color:#25D366}
 .ag-ganho{margin-top:12px;min-height:1.5em;text-align:center;color:#25D366;font-weight:600;font-size:15px;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
 .ag-ganho.on{opacity:1;transform:none}
-@media (max-width:760px){.ag-passos{grid-template-columns:1fr 1fr}.ag-passos li{font-size:13px;padding:10px 10px 10px 38px}}
+@media (max-width:760px){.ag-passos{grid-template-columns:1fr 1fr}.ag-passos li{font-size:14.5px;padding:10px 10px 10px 38px}}
 #agentes h2{font-size:clamp(2rem,3.3vw,2.9rem)}
-.ag-legenda{list-style:none;padding:0;margin-top:26px;display:flex;flex-wrap:wrap;gap:16px;color:var(--texto-2);font-size:13px}
+.ag-legenda{list-style:none;padding:0;margin-top:26px;display:flex;flex-wrap:wrap;gap:16px;color:var(--texto-2);font-size:14.5px}
 .ag-legenda li{display:flex;align-items:center;gap:8px}
 .ag-legenda i{width:9px;height:9px;border-radius:50%}
 .d-az{background:#04C7FC;box-shadow:0 0 10px #04C7FC}.d-vd{background:#25D366;box-shadow:0 0 10px #25D366}.d-am{background:#FFB547;box-shadow:0 0 10px #FFB547}
@@ -427,9 +434,9 @@ span.cli{cursor:default}
 .ag-ic{width:34px;height:34px;flex:none;border-radius:10px;display:grid;place-items:center;background:#ffffff0a;color:var(--texto-2);transition:.35s}
 .ag-ic svg{width:18px;height:18px}
 .ag-tx{display:grid;min-width:0}
-.ag-tx b{font-size:14px;font-weight:600;white-space:nowrap}
-.ag-tx small{font-size:12px;color:var(--texto-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ag-st{position:absolute;top:-9px;right:10px;font-style:normal;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:999px;opacity:0;transform:translateY(4px);transition:.3s;white-space:nowrap}
+.ag-tx b{font-size:15.5px;font-weight:600;white-space:nowrap}
+.ag-tx small{font-size:13.5px;color:var(--texto-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ag-st{position:absolute;top:-9px;right:10px;font-style:normal;font-size:13px;font-weight:600;padding:2px 8px;border-radius:999px;opacity:0;transform:translateY(4px);transition:.3s;white-space:nowrap}
 .ag-no.ativo{border-color:#04C7FC;box-shadow:0 0 0 1px #04c7fc55,0 10px 30px -12px #04C7FC}
 .ag-no.ativo .ag-ic{background:#04c7fc22;color:#04C7FC}
 .ag-no.ativo .ag-st{opacity:1;transform:none;background:#04C7FC;color:#04121a}
@@ -443,20 +450,20 @@ span.cli{cursor:default}
 .ag-central .ag-ic{background:#026cfc2a;color:#5ea8ff;width:40px;height:40px}
 .ag-central .ag-tx b{font-size:15px}
 .ag-equipe{margin-top:34px}
-.ag-msg{position:absolute;left:0;right:0;bottom:calc(100% + 12px);min-height:40px;padding:9px 12px;border-radius:12px 12px 12px 4px;background:#005c4b;color:#fff;font-size:13px;line-height:1.35;
+.ag-msg{position:absolute;left:0;right:0;bottom:calc(100% + 12px);min-height:40px;padding:9px 12px;border-radius:12px 12px 12px 4px;background:#005c4b;color:#fff;font-size:14.5px;line-height:1.35;
   opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s cubic-bezier(.2,.8,.2,1)}
 .ag-msg.on{opacity:1;transform:none}
 .ag-msg.painel{background:#1f2c44}
 .ag-msg.resp{background:#0d2a3a;border:1px solid #04c7fc55;border-radius:12px 12px 4px 12px}
 .ag-msg.resp small{color:#04C7FC;opacity:1}
 .ag-no[data-info]::after{content:attr(data-info);position:absolute;z-index:5;left:50%;top:calc(100% + 10px);width:230px;margin-left:-115px;padding:10px 12px;border-radius:12px;
-  background:#141b28;border:1px solid #2d3b55;box-shadow:0 14px 30px -12px #000;color:var(--texto);font-size:12.5px;font-weight:400;line-height:1.45;white-space:normal;
+  background:#141b28;border:1px solid #2d3b55;box-shadow:0 14px 30px -12px #000;color:var(--texto);font-size:14px;font-weight:400;line-height:1.45;white-space:normal;
   opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .25s,transform .25s,visibility .25s;pointer-events:none}
 .ag-no[data-info]:hover::after,.ag-no[data-info]:focus-visible::after,.ag-no.info::after{opacity:1;visibility:visible;transform:none}
 .ag-no[data-info]{cursor:help}
 .ag-no:hover,.ag-no:focus-visible,.ag-no.info{z-index:6}
 .ag-setores .ag-no:nth-last-child(-n+2)[data-info]::after{top:auto;bottom:calc(100% + 10px)}
-.ag-msg small{display:block;font-size:10.5px;opacity:.7;margin-bottom:2px}
+.ag-msg small{display:block;font-size:13px;opacity:.7;margin-bottom:2px}
 .ag-meio{padding-top:64px}
 @media (max-width:1100px){.ag-layout{grid-template-columns:1fr;gap:28px}}
 @media (max-width:760px){
@@ -476,6 +483,7 @@ span.cli{cursor:default}
 }
 @media (max-width:1100px){.trilho .cartao{flex-basis:calc((100% - 18px) / 2)}}
 @media (max-width:640px){.trilho .cartao{flex-basis:100%}}
+html,body{overflow-x:clip}
 </style>
 </head>
 <body>
@@ -516,10 +524,12 @@ span.cli{cursor:default}
       <div class="ato" data-ato="1" hidden>
         <h2 class="emb">O relógio corre. A tarefa não acaba.</h2>
         <p>Digitar nota, conferir comprovante, responder a mesma pergunta, cobrar quem atrasou. São horas da sua equipe indo embora todo dia.</p>
+        <ul class="ato-itens"><li>Mensagem de cliente sem resposta à noite</li><li>Nota e comprovante digitados um a um</li><li>Cobrança que depende de alguém lembrar</li></ul>
       </div>
       <div class="ato" data-ato="2" hidden>
         <h2 class="emb">A IA põe tudo em ordem.</h2>
-        <p>Ela responde, anota e organiza. Na dúvida, chama uma pessoa da sua equipe. Quem manda é você.</p>
+        <p>Ela responde, anota e organiza. Na dúvida, chama alguém da sua equipe.</p>
+        <ul class="ato-itens"><li>Atende o cliente a qualquer hora</li><li>Lê o documento e preenche o sistema</li><li>Avisa e cobra na data certa</li></ul>
       </div>
       <div class="acoes">
         <a class="rolar" href="#ramos">Role para ver <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 2v11M3.5 8.5 8 13l4.5-4.5"/></svg></a>
@@ -546,14 +556,15 @@ span.cli{cursor:default}
 <section class="sec" id="agentes">
   <div class="ag-layout">
     <div class="sec-cab ag-cab">
+      <span class="ag-selo"><span class="sl sob"></span>A gente constrói pra você</span>
       <h2>Uma IA que faz o trabalho de cada setor da sua empresa.</h2>
-      <p>Chegou um pedido pelo WhatsApp ou pelo painel? A IA entende o que precisa ser feito e executa o processo inteiro no setor certo: cota, confere, lança, envia e avisa. Quando um passo precisa de alguém da equipe, ela pede a aprovação e segue sozinha.</p>
+      <p>Chegou um pedido pelo WhatsApp ou pelo painel? A IA entende o que precisa ser feito e executa o processo inteiro no setor certo: cota, confere, lança, envia e avisa. Quando um passo precisa de alguém da equipe, ela chama e espera a aprovação.</p>
       <ul class="ag-legenda">
         <li><i class="d-az"></i>trabalhando</li><li><i class="d-vd"></i>concluído</li><li><i class="d-am"></i>precisa da equipe</li>
       </ul>
     </div>
     <div class="ag-coluna-painel">
-    <div class="ag-painel" id="ag-painel" aria-label="Exemplo: mensagens chegando e sendo distribuídas para os agentes de cada setor">
+    <div class="ag-painel" id="ag-painel" aria-label="Mensagens chegando e indo para cada setor">
       <svg class="ag-fios" id="ag-fios" aria-hidden="true"></svg>
       <div class="ag-col ag-entradas">
         <div class="ag-no ag-entrada" data-no="zap" tabindex="0" aria-label="WhatsApp: clientes e equipe"><span class="ag-ic"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-zap"/></svg></span><span class="ag-tx"><b>WhatsApp</b><small>clientes e equipe</small></span><em class="ag-st"></em></div>
@@ -616,7 +627,7 @@ span.cli{cursor:default}
   <div class="sec-cab"><h2>A IA trabalha. Quem manda é você.</h2><p>O jeito que a IA já trabalha nos nossos sistemas, e que a gente leva pro que construir pra você.</p></div>
   <div class="regras">
     <div class="regra luz"><span class="ic humano"></span><b>Na dúvida, chama uma pessoa.</b><p>O atendente passa a conversa pra sua equipe e abre um chamado no painel.</p></div>
-    <div class="regra luz"><span class="ic"></span><b>Sugere, não decide.</b><p>No comprovante, a IA preenche e alguém da equipe confere.</p></div>
+    <div class="regra luz"><span class="ic"></span><b>Sugere, não decide.</b><p>Na leitura de comprovante, a IA preenche e alguém da equipe confere.</p></div>
     <div class="regra luz"><span class="ic"></span><b>Gasto com teto.</b><p>No nosso atendente de pedidos, cada conversa tem limite de custo e o gasto aparece no painel.</p></div>
     <div class="regra luz"><span class="ic"></span><b>Você lê tudo.</b><p>No atendente de pedidos, todas as conversas ficam guardadas no painel.</p></div>
     <div class="regra luz"><span class="ic"></span><b>Nem tudo precisa de IA.</b><p>Às vezes uma automação simples resolve. Quando é assim, a gente fala.</p></div>
@@ -635,12 +646,14 @@ span.cli{cursor:default}
 <section class="sec" id="perguntas">
   <div class="sec-cab"><h2>Perguntas</h2></div>
   <div class="faq">
-    <details><summary>Serve para qualquer empresa?</summary><p>Serve. A gente atende qualquer ramo, do pequeno negócio à rede com várias lojas: hoje são mais de 20 empresas em 5 ramos diferentes. Cada solução é feita sob medida pro tamanho e pra rotina da sua empresa, e dá pra começar por um problema só.</p></details>
-    <details><summary>A IA vai falar besteira pro meu cliente?</summary><p>Ela responde com o que está no seu sistema e, quando não sabe, chama uma pessoa. As primeiras semanas são de acompanhamento, e você lê todas as conversas.</p></details>
-    <details><summary>Quanto tempo leva pra ficar pronto?</summary><p>Depende do tamanho do problema. Coisas mais simples, como ler documento ou mandar aviso na data certa, ficam prontas mais rápido. Um atendente que conversa com o seu cliente leva algumas semanas de ajuste com uso real. Em todos os casos, o prazo vem escrito na proposta, antes de começar.</p></details>
+    <details><summary>Preciso trocar o sistema que eu já uso?</summary><p>Não. Na maioria das vezes a solução entra no que você já tem: seu sistema, sua planilha, seu WhatsApp. A gente olha o seu antes de dizer.</p></details>
+    <details><summary>E se a IA errar?</summary><p>Ela só responde com o que está no seu sistema. Quando não sabe, passa a conversa para alguém da sua equipe. Onde um erro custa caro, como na leitura de comprovante, ela sugere e uma pessoa confere. E nas primeiras semanas a gente acompanha tudo junto com você e ajusta o que sair errado.</p></details>
+    <details><summary>Quanto custa e quanto tempo leva?</summary><p>Depende do problema. Um aviso na data certa sai rápido; um atendente que conversa com o cliente leva algumas semanas de ajuste com uso real. O preço e o prazo vêm por escrito antes de começar.</p></details>
+    <details><summary>Serve pra uma empresa do meu tamanho?</summary><p>A maioria dos nossos clientes é pequeno negócio de alimentação e varejo. Dá pra começar por um problema só. E se não precisar de IA, a gente fala.</p></details>
+    <details><summary>Qual IA vocês usam?</summary><p>Os modelos do Google (Gemini) e da OpenAI. A gente escolhe o certo pra cada tarefa, pelo resultado e pelo custo.</p></details>
+    <details><summary>E depois que estiver funcionando, quem dá suporte?</summary><p>A própria JZ Tech. É só chamar no WhatsApp: a gente acompanha, corrige e ajusta conforme o seu negócio muda.</p></details>
+    <details><summary>E os dados dos meus clientes?</summary><p>Ficam só com a sua empresa. A IA usa o que precisa pra fazer a tarefa, e o tratamento segue a LGPD.</p></details>
     <details><summary>A IA vai substituir meus funcionários?</summary><p>Ela tira o repetitivo, pra sua equipe cuidar do que dá dinheiro: vender e atender bem.</p></details>
-    <details><summary>Quanto custa?</summary><p>Depende do problema. O preço e o prazo vêm por escrito na proposta, antes de começar.</p></details>
-    <details><summary>E os meus dados?</summary><p>A IA só vê o que precisa pra fazer a tarefa, e você acompanha tudo o que ela fez.</p></details>
   </div>
 </section>
 
@@ -978,7 +991,7 @@ const RAMOS = {
   'Restaurante e delivery': [
     ['on', 'Atendente que anota o pedido', 'Sexta à noite o zap não para e o pedido sai anotado errado.', 'A IA mostra o cardápio, monta o pedido (até pizza meio a meio), calcula a taxa, confirma e manda pra cozinha.', 'ClickExpress'],
     ['on', 'Cliente que parou no meio', 'O cliente some no meio do pedido e ninguém percebe.', 'Ele recebe um lembrete e, quando fecha, a confirmação no zap.', 'ClickExpress'],
-    ['sob', 'Cliente sumido de volta', 'Quem pedia toda semana sumiu, e ninguém viu.', 'A IA acha quem sumiu e manda uma mensagem pessoal.', ''],
+    ['sob', 'O cliente sumido volta a comprar', 'Quem pedia toda semana sumiu, e ninguém viu.', 'A IA acha quem sumiu e manda uma mensagem pessoal.', ''],
     ['sob', 'Oferta do dia pronta', 'Montar o texto da promoção toda tarde.', 'A IA escreve a oferta do dia e deixa pronta pra postar no status.', ''],
     ['sob', 'Avaliação depois da entrega', 'Ninguém pergunta se o cliente gostou.', 'No dia seguinte a IA pergunta, e as respostas chegam num resumo.', ''],
     ['sob', 'Estoque que avisa', 'O queijo acaba no meio da sexta.', 'O sistema avisa quando um item está acabando, pelos pedidos do dia.', ''],
@@ -995,11 +1008,11 @@ const RAMOS = {
     ['on', 'Identidade conferida', 'Cópia de documento e a dúvida "é ele mesmo?".', 'Prova de vida, rosto comparado com o documento e assinatura eletrônica.', 'KYC'],
     ['on', 'Cobrança pelo WhatsApp', 'Fiado no caderno e vergonha de cobrar.', 'Lembrete e cobrança no zap, espalhados ao longo do dia.', 'CobraFácil'],
     ['meio', 'Ficha preenchida pela foto', 'O atendente digita RG, holerite e conta de luz.', 'A ficha vem preenchida e ele só confere.', ''],
-    ['meio', 'Relatório de crédito explicado', 'Gráfico que ninguém entende.', 'A IA explica em português o que mudou, só com números somados.', ''],
+    ['meio', 'Relatório de crédito explicado', 'Gráfico que ninguém entende.', 'A IA explica em português o que mudou, sem expor dado de nenhum cliente.', ''],
     ['sob', 'Parcela lembrada antes de vencer', 'O cliente esquece e atrasa.', 'Lembrete no zap três dias antes, com o valor e o PIX.', ''],
   ],
   'RH': [
-    ['on', 'Ninguém esquece prazo', 'O certificado vence e ninguém viu.', 'O sistema avisa antes do prazo, sozinho. Sem IA: nem tudo precisa dela.', 'ClickRH'],
+    ['on', 'Ninguém esquece prazo', 'O certificado vence e ninguém viu.', 'O sistema avisa antes do prazo, sozinho.', 'ClickRH'],
     ['sob', 'O funcionário pergunta no zap', '"Quantos dias de férias eu tenho?" pro RH o dia todo.', 'O assistente responde consultando o sistema, e cada um vê só o que é dele.', ''],
     ['sob', 'Triagem de currículo', 'A caixa lota na primeira vaga.', 'A IA organiza e explica. Quem decide é uma pessoa.', ''],
     ['sob', 'Primeira semana guiada', 'O novato chega e ninguém explica nada.', 'Ele recebe no zap o passo a passo dos primeiros dias.', ''],
@@ -1146,7 +1159,7 @@ new IntersectionObserver(es => es.forEach(e => { demoVisivel = e.isIntersecting;
 
 /* mural */
 const PIL = [['atender pedido no WhatsApp', 'entender áudio do cliente', 'ler comprovante de PIX', 'ler nota fiscal', 'descrever produto pela foto', 'conferir rosto e documento', 'avisar antes do prazo vencer', 'cobrar pelo WhatsApp', 'enviar recibo na data certa'],
-  ['marcar e confirmar horário', 'separar curioso de comprador', 'chamar de volta o cliente sumido', 'triar currículo', 'responder o funcionário sobre férias', 'responder "quanto vendi?" por áudio', 'escrever a oferta da semana', 'fazer um sistema conversar com o outro', 'tirar aquela planilha do caminho']];
+  ['marcar e confirmar horário', 'separar curioso de comprador', 'chamar de volta o cliente sumido', 'triar currículo', 'responder o funcionário sobre férias', 'responder "quanto vendi?" por áudio', 'escrever a oferta do dia', 'fazer um sistema conversar com o outro', 'tirar aquela planilha do caminho']];
 document.querySelectorAll('.pilulas').forEach((f, i) => {
   const html = PIL[i].map(p => `<span class="pilula">${p}</span>`).join('');
   f.innerHTML = html + html.replace(/<span/g, '<span aria-hidden="true"');
