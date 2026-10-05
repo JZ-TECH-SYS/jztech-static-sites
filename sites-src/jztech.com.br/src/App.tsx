@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
-  AboutUsSection,
-  ContactSection,
+  CasesSection,
+  ClientsSection,
   Footer,
   HeroSection,
+  IaSection,
   Navbar,
-  ShowcaseSection,
-  StatsSection,
+  StepsSection,
+  SystemsSection,
   TeamSection,
 } from "./components";
 
@@ -40,21 +41,61 @@ function useRevealOnScroll() {
   }, []);
 }
 
+/* Fundo da página: o brilho da abertura acompanha a rolagem e muda de tom
+   conforme a seção que está na tela (azul, ciano, violeta). */
+const ZONAS: Record<string, string> = {
+  clientes: "azul",
+  sistemas: "ciano",
+  cases: "ciano",
+  ia: "violeta",
+  como: "violeta",
+  equipe: "azul",
+};
+
+function useZonaDoFundo() {
+  const [zona, setZona] = useState("azul");
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setZona(ZONAS[e.target.id] ?? "azul");
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px" }
+    );
+    Object.keys(ZONAS).forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+  return zona;
+}
+
 function App() {
+  const zona = useZonaDoFundo();
   useRevealOnScroll();
 
   return (
     <div className="font-sans bg-[#FAFAFA] text-slate-900 antialiased selection:bg-brand-100 selection:text-brand-900">
+      <div className="fundo" data-zona={zona} aria-hidden="true">
+        <span className="fundo-azul" />
+        <span className="fundo-ciano" />
+        <span className="fundo-violeta" />
+      </div>
       <Navbar />
-      <main className="w-full pt-20">
+      <main className="relative z-[1] w-full">
         <HeroSection />
-        <AboutUsSection />
-        <StatsSection />
-        <ShowcaseSection />
+        <ClientsSection />
+        <SystemsSection />
+        <CasesSection />
+        <IaSection />
+        <StepsSection />
         <TeamSection />
-        <ContactSection />
       </main>
-      <Footer />
+      <div className="relative z-[1]">
+        <Footer />
+      </div>
     </div>
   );
 }
