@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react";
-import { MdArrowForward, MdClose, MdMenu } from "react-icons/md";
+import { MdClose, MdMenu, MdHome } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa";
+import { WHATSAPP } from "./whatsapp";
 
+// Na mesma ordem da página.
 const NAV_LINKS = [
-  { href: "#sobre", label: "Sobre nós" },
-  { href: "#servicos", label: "Serviços" },
-  { href: "#resultados", label: "Resultados" },
-  { href: "#projetos", label: "Projetos" },
+  { href: "#clientes", label: "Clientes" },
+  { href: "#sistemas", label: "Sistemas" },
+  { href: "#cases", label: "Cases" },
+  { href: "#ia", label: "IA" },
+  { href: "#como", label: "Como trabalhamos" },
   { href: "#equipe", label: "Equipe" },
-  { href: "#contato", label: "Contato" },
 ];
 
-/* logo-nova-96.png e a logo-nova.png redimensionada: a original tem 370KB,
-   pesado demais para um logo de 36px no topo de toda pagina */
-export const Wordmark = ({ className = "text-lg", logoClass = "w-9 h-9" }) => (
+/* logo-jz.png = a logo-nova.png reduzida para 192px, COM fundo transparente (a
+   logo-nova-96.png antiga tinha fundo branco colado e ficava um quadrado no topo) */
+export const Wordmark = ({ className = "text-lg", logoClass = "w-9 h-9", claro = false }) => (
   <span className="flex items-center gap-2.5">
-    <img
-      src="/img/logo-nova-96.png"
-      alt=""
-      aria-hidden="true"
-      className={`${logoClass} object-contain shrink-0`}
-    />
-    <span
-      className={`${className} font-bold tracking-tight text-slate-950 flex items-center gap-1`}
-    >
-      JZ <span className="text-slate-500 font-normal">TECH</span>
+    <img src="/img/logo-jz.png" alt="" aria-hidden="true" className={`${logoClass} object-contain shrink-0`} />
+    <span className={`${className} font-bold tracking-tight flex items-center gap-1 transition-colors ${claro ? "text-white" : "text-slate-950"}`}>
+      JZ <span className={`font-normal ${claro ? "text-slate-400" : "text-slate-500"}`}>TECH</span>
     </span>
   </span>
 );
@@ -31,97 +27,136 @@ export const Wordmark = ({ className = "text-lg", logoClass = "w-9 h-9" }) => (
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  // Sobre a abertura escura o menu fica transparente e claro, como nas landings.
+  const [naAbertura, setNaAbertura] = useState(true);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+      const abertura = document.getElementById("inicio");
+      setNaAbertura(!!abertura && abertura.getBoundingClientRect().bottom > 64);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // trava o scroll do body enquanto o menu mobile esta aberto
+  // trava o scroll do body enquanto o menu do celular está aberto e avisa a página
+  // (classe no <html>) para esconder o WhatsApp flutuante e o botão de subir
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
+    document.documentElement.classList.toggle("menu-aberto", isOpen);
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
+    addEventListener("keydown", esc);
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.classList.remove("menu-aberto");
+      removeEventListener("keydown", esc);
     };
   }, [isOpen]);
 
+  // Seção que está na tela agora: fica marcada no menu (computador e gaveta do celular).
+  const [ativa, setAtiva] = useState("#");
+  useEffect(() => {
+    const aoRolar = () => {
+      const linha = innerHeight * 0.35;
+      let atual = "#";
+      for (const l of NAV_LINKS) {
+        const el = document.querySelector(l.href);
+        if (el && el.getBoundingClientRect().top <= linha) atual = l.href;
+      }
+      setAtiva(atual);
+    };
+    aoRolar();
+    addEventListener("scroll", aoRolar, { passive: true });
+    return () => removeEventListener("scroll", aoRolar);
+  }, []);
+
+  const escuro = naAbertura;
+  const solid = !escuro && isScrolled;
+
   return (
+    <>
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b transition-all duration-300 ${
-        isScrolled
-          ? "border-slate-200/80 shadow-sm shadow-slate-200/60"
-          : "border-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${
+        solid ? "bg-white/95 backdrop-blur-xl border-slate-200/80" : "bg-transparent border-transparent"
       }`}
     >
-      <div
-        className={`max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between transition-all duration-300 ${
-          isScrolled ? "h-16" : "h-20"
-        }`}
-      >
-        <a
-          className="flex items-center focus:outline-none hover:opacity-80 transition-opacity"
-          href="#"
-          aria-label="JZ Tech — início"
-        >
-          <Wordmark className="text-lg" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+        <a href="#" aria-label="JZ Tech — início" className="hover:opacity-80 transition-opacity">
+          <Wordmark className="text-lg" claro={escuro} />
         </a>
 
-        {/* Navegação desktop */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <nav className={`hidden lg:flex items-center gap-8 text-[15px] font-medium transition-colors ${escuro ? "text-slate-300" : "text-slate-600"}`}>
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              className="relative py-1 transition-colors hover:text-brand-700 after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-brand-700 after:transition-transform after:duration-300 hover:after:scale-x-100"
-              href={link.href}
-            >
+            <a key={link.href} href={link.href} aria-current={ativa === link.href ? "true" : undefined}
+              className={`nav-link py-1 transition-colors ${ativa === link.href ? (escuro ? "text-white" : "text-brand-700") : ""} ${escuro ? "hover:text-white" : "hover:text-slate-950"}`}>
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <a
-            className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brand-700 text-white text-sm font-medium hover:bg-brand-800 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 group"
-            href="#contato"
-          >
-            <span>Contato</span>
-            <MdArrowForward className="text-base ml-1 group-hover:translate-x-0.5 transition-transform" />
-          </a>
-
+        <div className="flex items-center gap-2 lg:hidden">
           <button
             type="button"
             onClick={() => setIsOpen((open) => !open)}
             aria-expanded={isOpen}
             aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
-            className="lg:hidden w-10 h-10 rounded-lg border border-slate-200 bg-white flex items-center justify-center text-slate-700 hover:border-brand-500 hover:text-brand-700 active:scale-95 transition-all"
+            className={`lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors ${escuro ? "text-white hover:bg-white/10" : "text-slate-700 hover:bg-slate-100"}`}
           >
             {isOpen ? <MdClose className="text-xl" /> : <MdMenu className="text-xl" />}
           </button>
         </div>
       </div>
 
-      {/* Navegação mobile */}
+
+    </header>
+      {/* Menu do celular: gaveta pela direita, como nas landings */}
+      <div
+        aria-hidden="true"
+        onClick={() => setIsOpen(false)}
+        className={`lg:hidden fixed inset-0 z-[60] bg-slate-950/50 backdrop-blur-[2px] transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      />
       <nav
-        className={`lg:hidden overflow-hidden border-slate-200/80 bg-white/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out ${
-          isOpen ? "max-h-96 opacity-100 border-t" : "max-h-0 opacity-0"
-        }`}
+        aria-label="Menu"
+        className={`lg:hidden fixed top-0 right-0 bottom-0 z-[61] w-[288px] max-w-[85vw] bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col">
-          {NAV_LINKS.map((link) => (
+        <div className="h-16 px-5 flex items-center justify-between border-b border-slate-100">
+          <Wordmark className="text-base" logoClass="w-8 h-8" />
+          <button type="button" onClick={() => setIsOpen(false)} aria-label="Fechar menu" tabIndex={isOpen ? 0 : -1} className="w-10 h-10 rounded-full grid place-items-center text-slate-700 hover:bg-slate-100">
+            <MdClose className="text-xl" />
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto px-3 py-3 flex flex-col">
+          {[{ href: "#", label: "Início" }, ...NAV_LINKS].map((link) => (
             <a
               key={link.href}
               href={link.href}
               tabIndex={isOpen ? 0 : -1}
               onClick={() => setIsOpen(false)}
-              className="py-3 text-sm font-medium text-slate-700 border-b border-slate-100 last:border-0 hover:text-brand-700 hover:translate-x-1 transition-all duration-200"
+              aria-current={ativa === link.href ? "true" : undefined}
+              className={`relative flex items-center gap-3 px-3 py-3.5 rounded-xl text-base transition-colors ${
+                ativa === link.href ? "bg-brand-50 text-brand-700 font-semibold" : "font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-700"
+              }`}
             >
+              {ativa === link.href && <span className="absolute left-0 top-2.5 bottom-2.5 w-[3px] rounded-full bg-brand-600" />}
+              {link.href === "#" && <MdHome className="text-lg text-brand-600" />}
               {link.label}
             </a>
           ))}
         </div>
+        <div className="p-4 border-t border-slate-100">
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
+            tabIndex={isOpen ? 0 : -1}
+            className="flex items-center justify-center gap-2 h-12 rounded-full bg-[#25D366] text-white font-semibold hover:brightness-95 transition"
+          >
+            <FaWhatsapp className="text-lg" /> Falar no WhatsApp
+          </a>
+        </div>
       </nav>
-    </header>
+    </>
   );
 };
