@@ -21,8 +21,6 @@ const CLIENTS: { name: string; img?: string; href?: string }[] = [
   { name: "Pizzaria Ditali", img: "pizzaria-ditali.jpg", href: IG + "pizzariaditali/" },
   { name: "JB Corte&Fogo", img: "jb-corte-e-fogo.jpg", href: IG + "jbjulianabarbosabbq/" },
   { name: "Arena Adema", img: "arena-adema.jpg", href: IG + "arenaademarbeachclub/" },
-  { name: "Quintal", img: "quintal.png", href: "https://clickexpress.jztech.com.br/pedido/Quintal" },
-  { name: "Zeus Lanches", href: "https://clickexpress.jztech.com.br/pedido/ZeusLanches" },
   { name: "Scooby Aquários", img: "scooby-aquarios.jpg", href: IG + "paulo_scooby_aquarios/" },
   { name: "Hub Fazendas", img: "hub-fazendas.png", href: "https://hubfazendas.com.br/" },
   { name: "GTELog", img: "gtelog.png", href: "https://gtelog.com.br/" },
