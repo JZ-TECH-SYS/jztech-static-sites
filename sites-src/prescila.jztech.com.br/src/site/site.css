@@ -242,3 +242,8 @@ body.site { margin: 0; background: var(--papel); color: var(--tinta); font-famil
 .v-ctl button { width: 44px; height: 44px; }
 .r-base a:not(.r-ig), .logo { display: inline-block; padding: 12px 0; margin: -12px 0; }
 @media (min-width: 900px) { .topo nav a { padding: 12px 0; } }
+
+/* foto de ponta a ponta na seção de atendimentos (paisagem, sem cortar as crianças) */
+.foto.foto-larga { aspect-ratio: 4 / 3; }
+.atend .corpo { margin-bottom: 32px; }
+@media (min-width: 900px) { .atend { grid-template-columns: 1fr 1.1fr; } }

@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import './site.css';
 import hero from './img/hero.webp';
-import familia from './img/familia.webp';
+import sofa from './img/sofa.webp';
+import livros from './img/livros.webp';
+import criancas from './img/criancas.webp';
 import palco from './img/palco.webp';
 import turma from './img/turma.webp';
 import sala from './img/sala.webp';
@@ -15,20 +17,8 @@ const ZAP = '5544988036966';
 const zap = msg => `https://wa.me/${ZAP}?text=${encodeURIComponent('Olá, Prescila! Vi o seu site e ' + msg)}`;
 const ext = { target: '_blank', rel: 'noopener' };
 
-const ATENDIMENTOS = [
-  ['Adultos', 'Terapia individual.', 'gostaria de saber sobre a terapia para adultos.'],
-  ['Maternidade', 'Acolhimento para gestantes e mães.', 'gostaria de saber sobre o acompanhamento na maternidade.'],
-  ['Crianças e adolescentes', 'Atendimento infantil e juvenil.', 'gostaria de saber sobre o atendimento infantil.'],
-  ['Casais', 'Terapia para fortalecer a relação.', 'gostaria de saber sobre a terapia de casal.'],
-];
-const TEMAS = [
-  ['Maternidade Leve', 'Desafios emocionais, a transição para a maternidade e o autocuidado.'],
-  ['Cuidando da Sua Saúde Mental', 'Estratégias para o dia a dia contra o estresse e a ansiedade.'],
-  ['Relacionamentos Saudáveis', 'Comunicação, empatia e resolução de conflitos.'],
-  ['Onde o Girassol Acolhe a Alma', 'Luz interior, superação e autoconhecimento.'],
-];
 const FORMACAO = [
-  ['Psicologia', 'Universidade Paranaense, 2018'],
+  ['Psicologia', 'Universidade Paranaense, 2008'],
   ['Neurociência', 'FGV'],
   ['Liderança Inspiradora', 'FRST Falconi'],
   ['Comunicação Assertiva', 'com Lena Souza'],
@@ -83,16 +73,16 @@ export default function Site() {
   return (
     <>
       <header className={'topo' + (rolou ? ' rolou' : '')}>
-        <a className="logo" href="#inicio">Prescila Martins</a>
+        <a className="logo" href="#inicio">Prescila A. M. Carollo</a>
         <nav aria-label="Seções">
-          {[['sobre', 'Sobre'], ['atendimentos', 'Atendimentos'], ['empresas', 'Empresas'], ['pacotes', 'Pacotes']].map(([id, n]) => <a key={id} href={'#' + id} className={ativa === id ? 'ativo' : ''} aria-current={ativa === id ? 'true' : undefined}>{n}</a>)}
+          {[['formacao', 'Formação'], ['sobre', 'Sobre'], ['atendimentos', 'Atendimentos'], ['empresas', 'Empresas']].map(([id, n]) => <a key={id} href={'#' + id} className={ativa === id ? 'ativo' : ''} aria-current={ativa === id ? 'true' : undefined}>{n}</a>)}
         </nav>
         <button type="button" className={'hamb' + (aberto ? ' x' : '')} aria-label={aberto ? 'Fechar menu' : 'Abrir menu'} aria-expanded={aberto} aria-controls="menu-cel" onClick={() => setAberto(a => !a)}><span /><span /></button>
         <a className={'cta-topo' + (sobe ? ' on' : '')} tabIndex={sobe ? 0 : -1} aria-hidden={!sobe} href={zap('gostaria de agendar uma consulta.')} {...ext}>Agendar</a>
       </header>
       <div id="menu-cel" className={'menu-cel' + (aberto ? ' on' : '')} aria-hidden={!aberto} onClick={e => { if (e.target.closest('a')) setAberto(false); }}>
         <nav aria-label="Menu">
-          {[['sobre', 'Sobre'], ['atendimentos', 'Atendimentos'], ['empresas', 'Empresas'], ['pacotes', 'Pacotes']].map(([id, n], k) => (
+          {[['formacao', 'Formação'], ['sobre', 'Sobre'], ['atendimentos', 'Atendimentos'], ['empresas', 'Empresas']].map(([id, n], k) => (
             <a key={id} href={'#' + id} tabIndex={aberto ? 0 : -1} style={{ transitionDelay: (aberto ? 80 + k * 50 : 0) + 'ms' }}>{n}</a>
           ))}
         </nav>
@@ -108,23 +98,31 @@ export default function Site() {
           <div className="hero-txt">
             <p className="sobrelinha surge">Psicóloga · CRP 08/28396</p>
             <Linhas as="h1" className="mega" linhas={['Cuidando da', <>sua <em>alma</em></>, 'humana.']} />
-            <p className="hero-sub surge">Psicologia integrada, humanizada e cristã. Online ou presencial.</p>
+            <p className="hero-sub surge"><em>Acolher pessoas, despertar potencial e promover transformações.</em></p>
             <div className="hero-acoes surge">
               <a className="btn" href={zap('gostaria de agendar uma consulta.')} {...ext}>Agendar consulta <Seta /></a>
               <a className="link" href="#sobre">Conheça a Prescila</a>
             </div>
           </div>
-          <figure className="hero-foto foto"><img src={hero} alt="Prescila Martins sorrindo, de roupa clara" fetchPriority="high" /></figure>
+          <figure className="hero-foto foto"><img src={hero} alt="Prescila A. M. Carollo sorrindo, de roupa clara" fetchPriority="high" /></figure>
+        </section>
+
+        <section className="sobre bloco" id="formacao">
+          <figure className="sobre-foto foto"><img src={livros} alt="Prescila sorrindo, apoiada numa pilha de livros" loading="lazy" /></figure>
+          <div>
+            <h2 className="rotulo surge">Formação</h2>
+            <ul className="forms surge">{FORMACAO.map(([n, d]) => <li key={n}><b>{n}</b><span>{d}</span></li>)}</ul>
+          </div>
         </section>
 
         <section className="frase" aria-label="Frase da Prescila">
           <div className="frase-fundo" aria-hidden="true"><img src={campo} alt="" loading="lazy" /></div>
-          <Linhas as="p" className="frase-txt" linhas={['“Eu quero ser um girassol', 'para a alma dos que', 'me buscam.”']} />
-          <p className="frase-sub surge">Assim como os girassóis buscam o sol, a sua alma busca a luz, e essa luz está em você. Cuidar de si mesmo é um ato de amor e de coragem.</p>
+          <Linhas as="p" className="frase-txt" linhas={['“Minha principal missão', 'é iluminar caminhos.”']} />
+          <p className="frase-sub surge">Na clínica, quero ajudar pessoas a olhar para suas dores, compreender suas histórias e reconhecer novas possibilidades. Nas empresas, quero contribuir para que pessoas descubram capacidades, desenvolvam competências e transformem a maneira como se relacionam, trabalham e lideram.</p>
         </section>
 
         <section className="sobre bloco" id="sobre">
-          <figure className="sobre-foto foto"><img src={familia} alt="Prescila com a filha no colo" loading="lazy" /></figure>
+          <figure className="sobre-foto foto"><img src={sofa} alt="Prescila sentada num sofá claro, sorrindo" loading="lazy" /></figure>
           <div className="sobre-txt">
             <h2 className="rotulo surge">Sobre</h2>
             <Linhas className="titulo" linhas={['Meu nome é Prescila,', <>sim, com <em>“E”</em>.</>]} />
@@ -137,31 +135,21 @@ export default function Site() {
           </div>
         </section>
 
-        <section className="bloco" id="atendimentos">
-          <div className="cab">
+        <section className="sobre atend bloco" id="atendimentos">
+          <div className="sobre-txt">
             <h2 className="rotulo surge">Atendimentos</h2>
             <Linhas className="titulo" linhas={['Um espaço seguro,', <>sem <em>julgamentos</em>.</>]} />
-            <p className="cab-sub surge">Cada pessoa é única: as sessões seguem as suas necessidades. Escuta individual, familiar e organizacional, com supervisão e estudo de caso contínuos.</p>
+            <p className="corpo surge">Cada pessoa é única: as sessões seguem as suas necessidades. Escuta individual, familiar e organizacional, com supervisão e estudo de caso contínuos.</p>
+            <a className="btn surge" href={zap('gostaria de agendar uma consulta.')} {...ext}>Agendar consulta <Seta /></a>
           </div>
-          <ul className="lista">
-            {ATENDIMENTOS.map(([nome, desc, msg]) => (
-              <li key={nome} className="surge">
-                <a href={zap(msg)} {...ext}>
-                  <span className="l-nome">{nome}</span>
-                  <span className="l-desc">{desc}</span>
-                  <span className="l-ir">Conversar <Seta /></span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <figure className="foto foto-larga"><img src={criancas} alt="Prescila abraçada a quatro crianças, rindo" loading="lazy" /></figure>
         </section>
 
         <section className="empresas" id="empresas">
           <div className="emp-txt">
             <h2 className="rotulo surge">Para empresas</h2>
             <Linhas className="titulo" linhas={['Desenvolvimento', <>de <em>pessoas</em>.</>]} />
-            <p className="corpo surge">Assessoria, palestras e treinamentos para empresas, eventos e grupos, com o tema ajustado à sua necessidade.</p>
-            <ol className="temas surge">{TEMAS.map(([t, d]) => <li key={t}><span><b>{t}</b><small>{d}</small></span></li>)}</ol>
+            <p className="corpo surge">Formada em Psicologia desde 2008, seu principal campo de atuação foi a Psicologia Organizacional: atuou na Gazin no Desenvolvimento Humano, onde construiu um vasto repertório de treinamentos e projetos corporativos, contribuindo com equipes, líderes e negócios. Sempre mantendo seu principal valor: “Se tem querer, tem jeito”.</p>
             <a className="btn btn-claro surge" href={zap('gostaria de conversar sobre assessoria, palestra ou treinamento para a minha empresa.')} {...ext}>Levar para a minha empresa <Seta /></a>
           </div>
           <div className="emp-fotos">
@@ -181,25 +169,6 @@ export default function Site() {
             </figure>
             <figure className="foto f3"><img src={sala} alt="Prescila conduzindo um treinamento" loading="lazy" /></figure>
             <figure className="foto f4"><img src={turma} alt="Prescila com uma turma após o treinamento" loading="lazy" /></figure>
-          </div>
-        </section>
-
-        <section className="bloco duas" id="pacotes">
-          <div>
-            <h2 className="rotulo surge">Formação</h2>
-            <ul className="forms surge">{FORMACAO.map(([n, d]) => <li key={n}><b>{n}</b><span>{d}</span></li>)}</ul>
-          </div>
-          <div>
-            <h2 className="rotulo surge">Pacotes</h2>
-            <Linhas className="titulo" linhas={['Acompanhamento', <><em>contínuo</em>.</>]} />
-            <div className="pacotes">
-              {[['Quinzenal', '2 encontros por mês', 'pacote quinzenal (2 encontros por mês)'], ['Semanal', '4 encontros por mês · prioridade no agendamento', 'pacote semanal (4 encontros por mês)']].map(([n, q, m]) => (
-                <a key={n} className="pacote surge" href={zap(`gostaria de saber sobre o ${m}. Pode me passar os valores?`)} {...ext}>
-                  <span className="p-nome">{n}</span><span className="p-q">{q}</span><span className="l-ir">Consultar valores <Seta /></span>
-                </a>
-              ))}
-            </div>
-            <p className="nota surge">Materiais terapêuticos inclusos, escuta familiar sem custo adicional e horários flexíveis.</p>
           </div>
         </section>
 
