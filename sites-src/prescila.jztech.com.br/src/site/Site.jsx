@@ -88,7 +88,6 @@ export default function Site() {
         </nav>
         <div className="mc-base">
           <a className="btn" href={zap('gostaria de agendar uma consulta.')} {...ext} tabIndex={aberto ? 0 : -1}>Agendar consulta <Seta /></a>
-          <a className="mc-zap" href={zap('gostaria de falar com você.')} {...ext} tabIndex={aberto ? 0 : -1}>WhatsApp (44) 98803-6966</a>
         </div>
       </div>
       <div className={'mc-veu' + (aberto ? ' on' : '')} onClick={() => setAberto(false)} aria-hidden="true" />

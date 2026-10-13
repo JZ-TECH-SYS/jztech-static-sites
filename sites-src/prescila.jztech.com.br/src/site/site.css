@@ -216,7 +216,7 @@ body.site { margin: 0; background: var(--papel); color: var(--tinta); font-famil
 .hamb span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--tinta); transition: transform .45s var(--ease), top .45s var(--ease); }
 .hamb span:first-child { top: 17px; } .hamb span:last-child { top: 26px; }
 .hamb.x span:first-child { top: 21.5px; transform: rotate(45deg); } .hamb.x span:last-child { top: 21.5px; transform: rotate(-45deg); }
-.menu-cel { position: fixed; top: 0; right: 0; bottom: 0; z-index: 29; width: min(84vw, 340px); background: var(--papel); padding: 96px 28px 32px;
+.menu-cel { position: fixed; top: 0; right: 0; bottom: 0; z-index: 29; width: 100%; background: var(--papel); padding: 96px var(--lado) 32px;
   display: flex; flex-direction: column; justify-content: space-between; box-shadow: -20px 0 60px -20px rgba(43, 29, 26, .35);
   transform: translateX(100%); visibility: hidden; transition: transform .6s var(--ease), visibility 0s linear .6s; }
 .menu-cel.on { transform: none; visibility: visible; transition: transform .6s var(--ease), visibility 0s; }
@@ -229,7 +229,6 @@ body.site { margin: 0; background: var(--papel); color: var(--tinta); font-famil
 .menu-cel.on nav a { opacity: 1; transform: none; }
 .mc-base { display: grid; gap: 14px; }
 .mc-base .btn { justify-content: center; }
-.mc-zap { text-align: center; font-weight: 600; font-size: 15px; color: var(--vinho); padding: 8px 0; }
 @media (max-width: 899px) {
   .hamb { display: block; }
   .topo .cta-topo { display: none; }
