@@ -211,7 +211,8 @@ body {
   .plano .vl { grid-column: 1; }
   .plano .qt { grid-column: 1; }
   .plano .cta { grid-column: 2; grid-row: 1 / 3; margin: 0; }
-  .plano .qt, .plano .cta { white-space: nowrap; }
+  .plano .qt { white-space: nowrap; }
+  .plano .cta { text-align: right; justify-content: flex-end; }  /* 320 px: "Consultar valores" quebra linha em vez de vazar a caixa */
 }
 .rodape .feito { min-height: 44px; }
 .rodape .feito a { padding-top: 14px; padding-bottom: 14px; margin: -11px 0; }
