@@ -1221,6 +1221,18 @@ body.parado .m-loja,body.parado .m-estados text{animation:none;opacity:1}
 .jgrupo{overflow:hidden}
 @media (max-width:640px){.lista>.item,.jcards>.etapa{flex:0 0 100% !important;scroll-snap-stop:always}.lista,.jcards,.jcards.q{gap:0 !important;margin:0 !important;padding-left:0 !important;padding-right:0 !important}}
 html,body{overflow-x:clip}
+/* celular estreito (320 px = iPhone SE ou "Texto Maior"): nada passa da borda */
+@media (max-width:420px){
+  #lj .grade-t{grid-template-columns:1.3fr 1.2fr 1fr !important}
+  #lj .grade-t span:nth-child(4n+2){display:none}  /* sem a coluna do código de barras: a nota abaixo da grade já conta */
+  .info-l span{font-size:10.5px;padding:6px}
+  .logs-n{grid-template-columns:repeat(2,1fr)}
+  .compara tr{grid-template-columns:1fr}
+  .compara td:nth-child(3){padding-top:10px}
+  .cartaz{scale:.8}  /* o cartaz tem largura fixa (até 340 px): encolhe inteiro, sem refazer o desenho */
+  .formato span{padding:5px 8px;font-size:11.5px;white-space:nowrap}
+  .pontos{gap:5px}.pontos button{width:6px;height:6px}.pontos button.on{width:18px}
+}
 </style>
 </head>
 <body>
