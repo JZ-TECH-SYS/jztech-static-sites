@@ -465,11 +465,11 @@ span.cli{cursor:default}
 .ag-setores .ag-no:nth-last-child(-n+2)[data-info]::after{top:auto;bottom:calc(100% + 10px)}
 .ag-msg small{display:block;font-size:13px;opacity:.7;margin-bottom:2px}
 .ag-meio{padding-top:64px}
-@media (max-width:1100px){.ag-layout{grid-template-columns:1fr;gap:28px}}
+@media (max-width:1100px){.ag-layout{grid-template-columns:minmax(0,1fr);gap:28px}}
 @media (max-width:760px){
-  .ag-painel{grid-template-columns:1fr;gap:26px;padding:22px 16px}
-  .ag-entradas{grid-template-columns:1fr 1fr}
-  .ag-setores{grid-template-columns:1fr 1fr}
+  .ag-painel{grid-template-columns:minmax(0,1fr);gap:26px;padding:22px 16px}
+  .ag-entradas{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .ag-setores{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .ag-setores .ag-no:last-child{grid-column:1/-1}
   .ag-meio{padding-top:0}
   .ag-msg{position:relative;bottom:auto;min-height:0}
@@ -481,6 +481,8 @@ span.cli{cursor:default}
   .ag-tx small{white-space:normal}
   .ag-no{padding:10px}
 }
+/* 320-420 px: dois cartões lado a lado cortam o nome (Atendimento, WhatsApp); um por linha */
+@media (max-width:420px){.ag-entradas,.ag-setores{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:1100px){.trilho .cartao{flex-basis:calc((100% - 18px) / 2)}}
 @media (max-width:640px){.trilho .cartao{flex-basis:100%}}
 html,body{overflow-x:clip}
