@@ -525,11 +525,11 @@ body.sem3d .poster{opacity:1 !important}
 .filme canvas.pronto{opacity:1}
 .filme::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#050506d9 0%,#05050680 30%,transparent 55%),linear-gradient(0deg,#050506 0%,transparent 22%);opacity:var(--texto-veu,0)}
 .palco{isolation:isolate}
-/* o texto fica no alto, sobre o teto escuro do estúdio; o carro ocupa o meio e o chão */
+/* o texto fica embaixo, colado no "Role para continuar", sobre o chão escurecido */
 @media (min-aspect-ratio:1/1){
-  .ato{bottom:auto;top:calc(78px + 3vh)}
+  .ato{bottom:calc(clamp(40px,9vh,100px) + 76px)}
   .ato h2,.ato h1{font-size:clamp(2rem,3.6vw,3.4rem)}
-  .filme::after{background:radial-gradient(60% 55% at 12% 22%,#050506cc 0%,#05050680 45%,transparent 75%),linear-gradient(0deg,#050506 0%,transparent 14%)}
+  .filme::after{background:radial-gradient(60% 55% at 12% 80%,#050506cc 0%,#05050680 45%,transparent 75%),linear-gradient(0deg,#050506 0%,transparent 14%)}
 }
 @media (min-width:761px){body.so-pecas .ato.on{opacity:0;transform:translateY(-12px)}}
 /* celular: sem legendas das peças (pedido do Jean); o texto fica */
