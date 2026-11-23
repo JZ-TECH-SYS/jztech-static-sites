@@ -999,9 +999,9 @@ const RAMOS = {
     ['sob', 'Estoque que avisa', 'O queijo acaba no meio da sexta.', 'O sistema avisa quando um item está acabando, pelos pedidos do dia.', ''],
   ],
   'Loja e varejo': [
-    ['on', 'Produto cadastrado pela foto', 'Inventar descrição produto por produto.', 'A IA olha a foto e sugere descrição e atributos. Você revisa e salva.', 'ClickJoias'],
-    ['on', 'Comprovante de PIX lido', 'Digitar comprovante por comprovante.', 'A foto vira valor, data e pagador preenchidos. A equipe confere.', 'ClickJoias'],
-    ['on', 'Pagamento que dá baixa sozinho', 'Conferir o extrato pra ver quem pagou.', 'O pagamento cai, o sistema confere no banco e dá baixa.', 'ClickJoias'],
+    ['on', 'Produto cadastrado pela foto', 'Inventar descrição produto por produto.', 'A IA olha a foto e sugere descrição e atributos. Você revisa e salva.', 'ClickERP'],
+    ['on', 'Comprovante de PIX lido', 'Digitar comprovante por comprovante.', 'A foto vira valor, data e pagador preenchidos. A equipe confere.', 'ClickERP'],
+    ['on', 'Pagamento que dá baixa sozinho', 'Conferir o extrato pra ver quem pagou.', 'O pagamento cai, o sistema confere no banco e dá baixa.', 'ClickERP'],
     ['sob', 'Atendente de preço e estoque', 'Às 22h o cliente pergunta "tem em cinza? faz em 10x?" e ninguém responde.', 'A IA responde com o que está no seu sistema e chama o vendedor na hora de fechar.', ''],
     ['sob', '"Quanto vendi essa semana?"', 'Pra saber quanto vendeu, abrir o sistema e exportar planilha.', 'Manda um áudio e recebe a resposta. Toda segunda chega um resumo.', ''],
     ['sob', 'Parabéns com cupom', 'Ninguém lembra do aniversário do cliente.', 'A IA manda os parabéns com um cupom no dia certo.', ''],
@@ -1174,7 +1174,7 @@ document.querySelectorAll('.luz').forEach(c => c.addEventListener('pointermove',
 const SETA = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg>';
 const SIS = [
   ['ClickExpress', 'Pedidos, delivery e mesa por QR Code, com app do entregador e atendente de IA que anota o pedido no WhatsApp.', 'https://clickexpress.jztech.com.br/home'],
-  ['ClickJoias', 'Gestão de joalheria: estoque, vendas e crediário, com cadastro de produto pela foto e leitura de comprovante por IA.', 'https://click-joias.jztech.com.br/home'],
+  ['ClickERP', 'Gestão de joalheria: estoque, vendas e crediário, com cadastro de produto pela foto e leitura de comprovante por IA.', 'https://clickerp.jztech.com.br/home'],
   ['ClickRH', 'RH de rede de lojas: ficha do colaborador, avaliações, treinamentos, PDI, advertências e avisos de prazo.', 'https://click-rh.jztech.com.br/home'],
   ['PontoCheck', 'Ponto eletrônico com jornada, banco de horas e espelho de ponto mensal pronto para imprimir.', 'https://pontocheck.jztech.com.br/home'],
   ['KYC', 'Cadastro seguro do cliente: prova de vida, rosto comparado com o documento e assinatura eletrônica.', 'https://jztechkyc.jztech.com.br/home'],
@@ -1198,7 +1198,7 @@ const CLI = [
     ['O Rancho', 'orancho.jpg', IG('oranchoivate')], ['Taaki Seu Sushi', 'taaki.jpg', IG('taaki.seu.sushi')],
     ["D'itali Pizzaria", 'pizzariaditali.jpg', IG('pizza_ditali')], ['Black Sushi', 'blacksushi.jpg', IG('__blacksushi')],
     ['JB Corte&Fogo', 'jbcortefogo.jpg', IG('jbjulianabarbosabbq')], ['Confeitaria Doce Infância', 'doceinfancia.jpg', IG('confeitariadoceinfanciaa')]]],
-  ['Varejo e crediário', 'ClickJoias', [['Street Style', 'streetstyle.jpg', 'https://streetstyle.com.br'], ['Grupo Sonhare', 'sonhare.jpg', IG('lojas_sonharemoveis')],
+  ['Varejo e crediário', 'ClickERP', [['Street Style', 'streetstyle.jpg', 'https://streetstyle.com.br'], ['Grupo Sonhare', 'sonhare.jpg', IG('lojas_sonharemoveis')],
     ['Lucimar Colombo Semijoias', 'lucimar.jpg', IG('lucimarcolombosemijoias')], ['Bambinos', 'bambinos.jpg', IG('bambinosdv')], ['Scooby Aquários', 'scooby.jpg', IG('paulo_scooby_aquarios')]]],
   ['Arena esportiva', 'ClickReserva', [['Orla 44', 'orla.jpg', IG('orla.44douradina')], ['Arena Ademar Beach Club', 'arenaademar.jpg', IG('arenaademarbeachclub')]]],
 ];

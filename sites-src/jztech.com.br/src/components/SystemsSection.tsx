@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 
 /* frases tiradas do titulo (h1) e da descricao de cada landing no ar (02/10/2026) */
 export const SYSTEMS = [
-  { name: "ClickJoias", text: "Sua loja inteira num sistema só: balcão e site, estoque peça por peça, nota fiscal, crediário e financeiro.", url: "https://click-joias.jztech.com.br/home", color: "#b45309" },
+  { name: "ClickERP", text: "Sua loja inteira num sistema só: balcão e site, estoque peça por peça, nota fiscal, crediário e financeiro.", url: "https://clickerp.jztech.com.br/home", color: "#b45309" },
   { name: "ClickExpress", text: "Pedidos, delivery, notas fiscais, estoque e financeiro do seu negócio, no celular e no computador.", url: "https://clickexpress.jztech.com.br/home", color: "#1976d2" },
   { name: "JZ TECH ZAP", text: "O WhatsApp da empresa em equipe: vários atendentes, campanhas e automação num painel só.", url: "https://web-zap.jztech.com.br/", color: "#22c55e" },
   { name: "CobraFácil", text: "Cobrança automática pelo WhatsApp: lembrete antes do vencimento, aviso no dia e cobrança do atraso, com a chave PIX.", url: "https://cobrafacil.jztech.com.br/home", color: "#059669" },
@@ -20,7 +20,7 @@ export const SYSTEMS = [
 /* Arquivo de cada sistema: a abertura da landing (public/img/sistemas/telas, a mesma página que o
    cartão abre) e a logo da tela de entrada (public/img/sistemas). */
 const TELA: Record<string, string> = {
-  ClickJoias: "clickjoias", ClickExpress: "clickexpress", "JZ TECH ZAP": "zap", "CobraFácil": "cobrafacil",
+  ClickERP: "clickerp", ClickExpress: "clickexpress", "JZ TECH ZAP": "zap", "CobraFácil": "cobrafacil",
   ClickReserva: "clickreserva", "JZ Tech KYC": "kyc", ClickRH: "clickrh", "Ponto-Check": "pontocheck",
   ClickCartaz: "clickcartaz", Ouvidoria: "ouvidoria", HubNotas: "hubnotas", ZeroPapel: "zeropapel",
 };

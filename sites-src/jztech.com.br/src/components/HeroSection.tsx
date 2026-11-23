@@ -26,7 +26,7 @@ const ATOS = [
 /* Os 12 sistemas da vitrine, na ordem dos círculos do hub (ato 3), com a logo da tela de login de
    cada um (public/img/sistemas). Cor = a do contorno do círculo. */
 const SISTEMAS = [
-  { nome: "ClickJoias", logo: "clickjoias", cor: "#3B82F6" },
+  { nome: "ClickERP", logo: "clickerp", cor: "#3B82F6" },
   { nome: "ClickExpress", logo: "clickexpress", cor: "#2DD4BF" },
   { nome: "JZ TECH ZAP", logo: "zap", cor: "#8B5CF6" },
   { nome: "CobraFácil", logo: "cobrafacil", cor: "#34D399" },

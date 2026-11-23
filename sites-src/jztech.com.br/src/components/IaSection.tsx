@@ -3,7 +3,7 @@ import { MdAutoAwesome, MdArrowForward, MdLockOutline, MdTune, MdHowToReg } from
 
 /* Só exemplos que a IA já faz em sistema nosso — cada um conferido no código
    (04/10/2026): pedido por áudio e lembrete do cliente sumido (ClickExpress),
-   nota de despesa pela foto (api-service), comprovante lido (ClickJoias), nota
+   nota de despesa pela foto (api-service), comprovante lido (ClickERP), nota
    fiscal lida (HubNotas, ExtracaoService), selfie x documento (KYC), extrato
    lido para a baixa e análise do Raio-X do crédito (ccfle, ConciliacaoHandler e
    RaioXInsightsHandler), descrição de produto (Hub Faci Lar,

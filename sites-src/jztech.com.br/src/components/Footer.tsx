@@ -108,7 +108,7 @@ export const Footer = () => (
           </div>
         </div>
 
-        <div className="mt-16 pt-8 pb-36 lg:pb-0 border-t border-white/10 flex flex-col-reverse sm:flex-row items-center justify-between gap-5">
+        <div className="mt-16 pt-8 pb-44 lg:pb-0 border-t border-white/10 flex flex-col-reverse sm:flex-row items-center justify-between gap-5">
           <p className="text-[14px] text-slate-500">© 2026 JZ Tech — Todos os direitos reservados</p>
           <div className="flex items-center gap-6">
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className={`${linkClass} inline-flex items-center gap-2`}>
