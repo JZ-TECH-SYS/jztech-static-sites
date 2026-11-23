@@ -20,12 +20,12 @@ const CASES = [
     tags: ["Roteirização", "Rastreio", "Marketplace de frete", "App do motorista"],
   },
   {
-    title: "ClickJoias",
-    logo: "/img/sistemas/clickjoias.png",
+    title: "ClickERP",
+    logo: "/img/sistemas/clickerp.png",
     description:
       "Gestão completa para lojas físicas e online: estoque, produtos, pedidos, caixa, ordens de serviço e recebimentos num só lugar, com NF-e e NFC-e ponta a ponta e pagamento por PIX e Cielo.",
-    image: "/img/click-joias.png",
-    address: "click-joias.jztech.com.br",
+    image: "/img/clickerp.png",
+    address: "clickerp.jztech.com.br",
     tags: ["Gestão de loja", "NF-e e NFC-e", "PIX e Cielo", "PDV e estoque"],
   },
   {
@@ -61,15 +61,21 @@ export const CasesSection = () => (
               data-reveal={i % 2 ? "right" : "left"}
               className={`case-shot lg:col-span-7 ${i % 2 ? "lg:order-2" : ""}`}
             >
-              <div className="rounded-2xl overflow-hidden bg-slate-100 shadow-[0_24px_48px_-24px_rgba(15,23,42,0.35)]">
+              <a
+                href={`https://${c.address}${c.address.endsWith("jztech.com.br") ? "/home" : ""}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Abrir ${c.title} (${c.address}) em nova aba`}
+                className="group block rounded-2xl overflow-hidden bg-slate-100 shadow-[0_24px_48px_-24px_rgba(15,23,42,0.35)] transition-shadow duration-300 hover:shadow-[0_32px_64px_-24px_rgba(15,23,42,0.45)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-600">
                 <div className="h-9 px-4 flex items-center gap-3 bg-slate-50 border-b border-slate-200/80">
                   <span className="flex gap-1.5" aria-hidden="true">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#F87171]" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[#FBBF24]" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[#34D399]" />
                   </span>
-                  <span className="flex-1 min-w-0 text-center text-[12.5px] text-slate-500 truncate rounded-md bg-white border border-slate-200/80 px-3 py-0.5">
+                  <span className="flex-1 min-w-0 text-center text-[12.5px] text-slate-500 truncate rounded-md bg-white border border-slate-200/80 px-3 py-0.5 transition-colors duration-300 group-hover:text-brand-700 group-hover:border-brand-300">
                     {c.address}
+                    <span aria-hidden="true" className="inline-block ml-1 opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">↗</span>
                   </span>
                 </div>
                 <div className="aspect-video overflow-hidden">
@@ -77,10 +83,10 @@ export const CasesSection = () => (
                     src={c.image}
                     alt={`Tela do ${c.title}`}
                     loading="lazy"
-                    className="w-full h-full object-cover object-top transition-transform duration-[900ms] ease-out"
+                    className="w-full h-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                   />
                 </div>
-              </div>
+              </a>
             </figure>
 
             <div data-reveal className={`lg:col-span-5 ${i % 2 ? "lg:order-1" : ""}`}>
