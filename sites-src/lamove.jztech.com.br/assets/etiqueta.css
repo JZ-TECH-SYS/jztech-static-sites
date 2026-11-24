@@ -39,3 +39,9 @@
 .etq-gira::before{filter:none!important;left:-4%;right:-4%;top:6%;bottom:-8%;background:radial-gradient(closest-side,rgba(0,0,0,.4),rgba(0,0,0,0))!important}
 /* a etiqueta gira em volta da argolinha: o cordão continua no centro dela com qualquer inclinação */
 .etq-tilt{transform-origin:50% calc(4.4% + 11px)}
+/* argolinha no meio da faixa bege de cima (nunca sobre a foto); o cordão e o giro acompanham */
+.etq{--fx:.12}
+.etq-face{padding-top:calc(var(--w) * var(--fx))}
+.etq-ilhos{--d:clamp(10px,calc(var(--w) * .075),22px);top:calc(var(--w) * var(--fx) / 2)!important;width:var(--d)!important;height:var(--d)!important;margin:calc(var(--d) / -2) 0 0 calc(var(--d) / -2)!important}
+.etq-cordao{bottom:calc(100% - var(--w) * var(--fx) / 2)!important}
+.etq-tilt{transform-origin:50% calc(var(--w) * var(--fx) / 2)}
