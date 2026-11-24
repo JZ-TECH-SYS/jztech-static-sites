@@ -17,6 +17,7 @@ jg-eletricista.jztech.com.br|vite
 juninho-mototaxi.jztech.com.br|vite
 leticia.jztech.com.br|static
 street.style.links.jztech.com.br|static
+lamove.jztech.com.br|static
 jean.jztech.com.br|static
 '
 echo "$MAP" | while IFS='|' read -r site type; do
