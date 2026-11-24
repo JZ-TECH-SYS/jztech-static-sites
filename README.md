@@ -19,6 +19,7 @@ clientes): **1 nginx no GKE**, roteado por Host no **Gateway compartilhado** (IP
 | leticia.jztech.com.br | joaosn/niverleticia | estático |
 | street.style.links.jztech.com.br | joaosn/street-style-landing | estático |
 | jean.jztech.com.br | JeanFelipe10/Portifolio (cliente) | estático |
+| lamove.jztech.com.br | criado aqui (La Movê, página + /bio/) | estático |
 | clientecelularis.jztech.com.br | — | placeholder |
 
 ## Build / deploy
@@ -27,7 +28,9 @@ clientes): **1 nginx no GKE**, roteado por Host no **Gateway compartilhado** (IP
 ./build.sh --push   # idem + push no Artifact Registry + rollout no GKE
 ```
 - `nginx.conf` — `map $host -> /sites/<dominio>` (1 server roteia por Host) + bloqueio de dotfiles.
-- `Dockerfile` — nginx:alpine + COPY sites + `chmod -R a+rX /sites`.
+- `nginx.conf` — a La Movê tem `server` próprio (cabeçalhos de segurança, 404 de verdade, gzip com `gzip_proxied any` por causa do balanceador do Google).
+- `Dockerfile` — nginx:1.30-alpine (estável; pega as correções 1.30.x a cada publicação) + COPY sites + `chmod -R a+rX /sites`.
+- Publicação: a imagem é marcada com o commit (`static-sites:<sha>`), então a volta automática desfaz até imagem quebrada.
 - `k8s.yaml` — ns `static-sites`, Deployment (2 réplicas), Service, HTTPRoute (todos os hosts).
 
 ## Editar / adicionar site
@@ -35,3 +38,6 @@ clientes): **1 nginx no GKE**, roteado por Host no **Gateway compartilhado** (IP
 2. (site novo) adicione no `MAP` do `build.sh` + no `map` do `nginx.conf` + nos `hostnames` do HTTPRoute (`k8s.yaml`)
    + cert no `jztech-infra/gateway.tf` (DNS-auth p/ subdomínio; LB-auth p/ apex) + A no DNS → `35.201.93.142`.
 3. `./build.sh --push`.
+
+## Pendências
+- [#25](https://github.com/JZ-TECH-SYS/jztech-static-sites/issues/25) — ícone da aba (`vite.svg`) dá 404 em joaosn, jg-eletricista e juninho-mototaxi. Arrumar quando mexer em cada um.
