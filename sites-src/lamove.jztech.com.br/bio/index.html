@@ -543,13 +543,17 @@ html:not(.js) .seta-pilha{display:none}
 .cortina-bio img{width:min(320px,60vw);height:auto;clip-path:inset(0 100% 0 0);animation:logo-revela 1s cubic-bezier(.16,1,.3,1) .15s forwards}
 @keyframes cortina-sobe{to{transform:translateY(-100%)}}
 @media (prefers-reduced-motion:reduce){.js .cortina-bio{display:none}}
+/* placa do studio: o barbante desce bem no centro da argolinha e a placa balança em volta dela */
+.preco .ilhos{right:12px!important;top:12px!important}
+.barbante-k{right:11.5px!important;height:22px!important}
+.preco{transform-origin:calc(100% - 16.5px) 16.5px!important}
 </style>
 </head>
 <body>
 <div class="cortina-bio" aria-hidden="true"><img src="/assets/logo-la-move-claro.svg" alt="" width="369" height="104"></div>
 <div class="pagina">
   <section class="tecido" aria-label="La Movê">
-    <video muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback nofullscreen" tabindex="-1" poster="/assets/video/tecido-poster.webp" aria-hidden="true" data-webm="/assets/video/tecido.webm?v=2" data-mp4="/assets/video/tecido.mp4?v=2"></video>
+    <video muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback nofullscreen" tabindex="-1" poster="/assets/video/tecido-poster.webp" aria-hidden="true" data-webm="/assets/video/tecido.webm?v=3" data-mp4="/assets/video/tecido.mp4?v=3"></video>
     <canvas class="tela-tecido" aria-hidden="true"></canvas>
     <span class="emenda" aria-hidden="true"></span>
     <h1><img src="/assets/logo-la-move-claro.svg" alt="La Movê" width="369" height="104"></h1>
