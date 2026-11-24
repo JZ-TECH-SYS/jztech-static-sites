@@ -24,7 +24,8 @@ jobs:
       contents: read
       id-token: write
     env:
-      IMG: southamerica-east1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/jztech-docker-prod/static-sites:latest
+      # imagem marcada com o commit: o servidor roda exatamente esta versão e a volta automática desfaz até imagem quebrada
+      IMG: southamerica-east1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/jztech-docker-prod/static-sites
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -77,8 +78,9 @@ jobs:
           done
           mkdir -p sites/clientecelularis.jztech.com.br
           printf '<!doctype html><html lang=pt-BR><meta charset=utf-8><title>Em breve</title><body style="font-family:sans-serif;text-align:center;padding:4rem"><h1>Em construção</h1></body></html>' > sites/clientecelularis.jztech.com.br/index.html
-          docker build -t "$IMG" .
-          docker push "$IMG"
+          docker build -t "$IMG:$GITHUB_SHA" -t "$IMG:latest" .
+          docker push "$IMG:$GITHUB_SHA"
+          docker push "$IMG:latest"
 
       - name: Get GKE credentials
         uses: google-github-actions/get-gke-credentials@64bc7249bbcf78056bb92f14d3cedc2da193946c # v2
@@ -88,8 +90,7 @@ jobs:
 
       - name: Deploy no GKE
         run: |
-          kubectl apply -f k8s.yaml
-          kubectl rollout restart deployment/static-sites -n static-sites
+          sed "s#/static-sites:latest#/static-sites:${GITHUB_SHA}#" k8s.yaml | kubectl apply -f -
           kubectl rollout status deployment/static-sites -n static-sites --timeout=180s || {
             kubectl rollout undo deployment/static-sites -n static-sites
             exit 1
