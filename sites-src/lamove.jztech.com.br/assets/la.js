@@ -80,7 +80,7 @@ document.querySelectorAll('.vid-fonte').forEach((v) => {
   const telaBio = v.parentElement.querySelector('.tela-bio');
   const verde = v.dataset.tela ? v.dataset.tela.split(',').map(Number) : null; // x1,y1,x2,y2,larguraOriginal,alturaOriginal
   let ligado = false, visivel = false, t0 = performance.now();
-  const mede = () => { const r = tela.getBoundingClientRect(), d = 1; tela.width = r.width * d; tela.height = r.height * d; };
+  const mede = () => { const r = tela.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); tela.width = r.width * d; tela.height = r.height * d; };
   const desenha = () => {
     if (!visivel) return;
     if (v.readyState >= 2) {
@@ -206,7 +206,8 @@ document.querySelectorAll('.marquee').forEach((mq) => {
   const base = new Image(); const bio = tela.parentElement.querySelector('.tela-bio');
   const g = tela.dataset.tela.split(',').map(Number), ctx = tela.getContext('2d');
   let ver = false; const t0 = performance.now();
-  let vg; const mede = () => { const r = tela.getBoundingClientRect(); tela.width = r.width; tela.height = r.height; vg = ctx.createRadialGradient(tela.width / 2, tela.height / 2, tela.width * 0.25, tela.width / 2, tela.height / 2, tela.width * 0.75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.36)'); };
+  // desenha na resolução da tela (até 2x): no celular 1x ficava borrado
+  let vg; const mede = () => { const r = tela.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); tela.width = r.width * d; tela.height = r.height * d; vg = ctx.createRadialGradient(tela.width / 2, tela.height / 2, tela.width * 0.25, tela.width / 2, tela.height / 2, tela.width * 0.75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.36)'); };
   const desenha = () => {
     if (!ver) return;
     if (base.complete && base.naturalWidth && bio && bio.complete) {
