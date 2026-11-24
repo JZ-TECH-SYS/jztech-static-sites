@@ -3,7 +3,7 @@ const raiz = document.documentElement;
 const calmo = matchMedia('(prefers-reduced-motion: reduce)').matches;
 requestAnimationFrame(() => requestAnimationFrame(() => raiz.classList.add('pronto')));
 // a abertura sai do caminho depois da cortina
-setTimeout(() => document.querySelector('.abertura')?.remove(), calmo ? 0 : 2400);
+setTimeout(() => document.querySelector('.abertura')?.remove(), calmo ? 0 : 1500);
 
 // Linhas dos títulos: numera cada linha para a cascata
 document.querySelectorAll('.linhas').forEach((h) => h.querySelectorAll('.ln > span').forEach((s, i) => s.style.setProperty('--i', i)));
@@ -17,6 +17,7 @@ document.querySelectorAll('.linhas,.revela,.foto,.rod-gigante').forEach((el) => 
   const topo = document.querySelector('.topo'), barra = document.querySelector('.progresso'), subir = document.querySelector('.subir');
   const links = [...document.querySelectorAll('.menu a')], alvos = links.map((a) => document.querySelector(a.getAttribute('href')));
   const fotos = [...document.querySelectorAll('.foto > img:not(.tela-bio):not(.poster)')];
+  const gavLinks = [...document.querySelectorAll('.gaveta-links a')];
   let pedido = false;
   const quadro = () => {
     pedido = false; const y = scrollY, h = innerHeight;
@@ -31,6 +32,7 @@ document.querySelectorAll('.linhas,.revela,.foto,.rod-gigante').forEach((el) => 
     }
     let ativo = -1; alvos.forEach((s, i) => { if (s && s.getBoundingClientRect().top < h * .35) ativo = i; });
     links.forEach((a, i) => a.classList.toggle('ativo', i === ativo));
+    gavLinks.forEach((a, i) => { a.classList.toggle('ativo', i === ativo); if (i === ativo) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
     if (!calmo) document.querySelectorAll('.nada-vel').forEach((el) => { const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > h) return; el.style.setProperty('--pv', ((r.top + r.height / 2 - h / 2) * +el.dataset.vel).toFixed(1) + 'px'); });
     if (!calmo) fotos.forEach((im) => { const r = im.parentElement.getBoundingClientRect(); if (r.bottom < 0 || r.top > h) return; im.style.setProperty('--py', ((r.top + r.height / 2 - h / 2) / h * -14).toFixed(1) + 'px'); });
   };
@@ -116,7 +118,9 @@ document.querySelectorAll('.vid-fonte').forEach((v) => {
   new IntersectionObserver(([it]) => {
     visivel = it.isIntersecting;
     if (visivel) { const vai = () => { liga(); v.play().catch(() => {}); requestAnimationFrame(desenha); };
-      if (document.readyState === 'complete') vai(); else addEventListener('load', vai, { once: true }); }
+      // vídeo só baixa depois que a cortina saiu: a primeira tela (foto parada do tecido) fica pronta antes
+      const depois = () => setTimeout(vai, Math.max(0, 1500 - performance.now()));
+      if (document.readyState === 'complete') depois(); else addEventListener('load', depois, { once: true }); }
     else v.pause();
   }, { rootMargin: '120px' }).observe(v.parentElement);
 });
