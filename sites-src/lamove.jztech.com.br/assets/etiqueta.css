@@ -45,3 +45,9 @@
 .etq-ilhos{--d:clamp(10px,calc(var(--w) * .075),22px);top:calc(var(--w) * var(--fx) / 2)!important;width:var(--d)!important;height:var(--d)!important;margin:calc(var(--d) / -2) 0 0 calc(var(--d) / -2)!important}
 .etq-cordao{bottom:calc(100% - var(--w) * var(--fx) / 2)!important}
 .etq-tilt{transform-origin:50% calc(var(--w) * var(--fx) / 2)}
+/* sem vulto ao tocar: a sombra fica parada atrás (não gira junto) e o navegador não pinta a caixa de toque */
+.etq{-webkit-tap-highlight-color:transparent}
+.etq:focus:not(:focus-visible),.etq:focus:not(:focus-visible) .etq-face{outline:none}
+.etq-gira::before{display:none!important}
+.etq-tilt{position:relative}
+.etq-tilt::before{content:"";position:absolute;left:-4%;right:-4%;top:6%;bottom:-8%;background:radial-gradient(closest-side,rgba(0,0,0,.4),rgba(0,0,0,0));transform:translateZ(-1px);pointer-events:none}
