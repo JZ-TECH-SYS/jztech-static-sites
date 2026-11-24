@@ -1,0 +1,21 @@
+# La Movê: aberto para busca (Google, Bing) e para as IAs que citam a loja nas respostas.
+# Decisão: robôs de BUSCA e de resposta das IAs liberados; robôs de TREINO também liberados,
+# porque o site só tem informação pública da loja e ser lembrada pelas IAs ajuda a vender.
+User-agent: *
+Allow: /
+
+# Busca das IAs (citam o site nas respostas)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+Allow: /
+
+# Treino das IAs
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://lamove.jztech.com.br/sitemap.xml

@@ -13,6 +13,11 @@ metadata:
 spec:
   replicas: 2
   revisionHistoryLimit: 3
+  minReadySeconds: 5
+  progressDeadlineSeconds: 120
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }
   selector:
     matchLabels: { app: static-sites }
   template:
@@ -33,9 +38,23 @@ spec:
             httpGet: { path: /nginx-health, port: 80 }
             initialDelaySeconds: 5
             periodSeconds: 20
+          securityContext: { allowPrivilegeEscalation: false }
+          lifecycle:
+            preStop:
+              exec: { command: ["sleep", "5"] }
           resources:
             requests: { cpu: 10m, memory: 32Mi }
             limits:   { cpu: 200m, memory: 128Mi }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: static-sites
+  namespace: static-sites
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels: { app: static-sites }
 ---
 apiVersion: v1
 kind: Service
@@ -62,6 +81,7 @@ spec:
     - leticia.jztech.com.br
     - prescila.jztech.com.br
     - street.style.links.jztech.com.br
+    - lamove.jztech.com.br
     - jean.jztech.com.br
     - jg-eletricista.jztech.com.br
     - scooby.aquarios.link.jztech.com.br

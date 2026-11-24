@@ -1,5 +1,5 @@
 # JZ-TECH — imagem dos sites estaticos (servidos por 1 nginx, roteado por Host no Gateway)
-FROM nginx:1.27-alpine
+FROM nginx:1.30-alpine
 
 # Remove config default e aplica a nossa (map Host -> docroot)
 RUN rm -f /etc/nginx/conf.d/default.conf

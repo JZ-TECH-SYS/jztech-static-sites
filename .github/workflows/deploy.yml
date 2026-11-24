@@ -24,22 +24,25 @@ jobs:
       contents: read
       id-token: write
     env:
-      IMG: southamerica-east1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/jztech-docker-prod/static-sites:latest
+      # imagem marcada com o commit: o servidor roda exatamente esta versão e a volta automática desfaz até imagem quebrada
+      IMG: southamerica-east1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/jztech-docker-prod/static-sites
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
 
       - name: Auth GCP (Workload Identity)
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
 
-      - uses: google-github-actions/setup-gcloud@v2
+      - uses: google-github-actions/setup-gcloud@e427ad8a34f8676edf47cf7d7925499adf3eb74f # v2
 
       - name: Configure Docker (Artifact Registry)
         run: gcloud auth configure-docker southamerica-east1-docker.pkg.dev --quiet
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
 
@@ -56,6 +59,7 @@ jobs:
           juninho-mototaxi.jztech.com.br|vite
           leticia.jztech.com.br|static
           street.style.links.jztech.com.br|static
+          lamove.jztech.com.br|static
           jean.jztech.com.br|static
           '
           echo "$MAP" | while IFS='|' read -r site type; do
@@ -74,17 +78,20 @@ jobs:
           done
           mkdir -p sites/clientecelularis.jztech.com.br
           printf '<!doctype html><html lang=pt-BR><meta charset=utf-8><title>Em breve</title><body style="font-family:sans-serif;text-align:center;padding:4rem"><h1>Em construção</h1></body></html>' > sites/clientecelularis.jztech.com.br/index.html
-          docker build -t "$IMG" .
-          docker push "$IMG"
+          docker build -t "$IMG:$GITHUB_SHA" -t "$IMG:latest" .
+          docker push "$IMG:$GITHUB_SHA"
+          docker push "$IMG:latest"
 
       - name: Get GKE credentials
-        uses: google-github-actions/get-gke-credentials@v2
+        uses: google-github-actions/get-gke-credentials@64bc7249bbcf78056bb92f14d3cedc2da193946c # v2
         with:
           cluster_name: jztech-gke-prod
           location: southamerica-east1-a
 
       - name: Deploy no GKE
         run: |
-          kubectl apply -f k8s.yaml
-          kubectl rollout restart deployment/static-sites -n static-sites
-          kubectl rollout status deployment/static-sites -n static-sites --timeout=180s
+          sed "s#/static-sites:latest#/static-sites:${GITHUB_SHA}#" k8s.yaml | kubectl apply -f -
+          kubectl rollout status deployment/static-sites -n static-sites --timeout=180s || {
+            kubectl rollout undo deployment/static-sites -n static-sites
+            exit 1
+          }
