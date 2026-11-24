@@ -542,6 +542,8 @@ html:not(.js) .seta-pilha{display:none}
 .cortina-bio img{width:min(320px,60vw);height:auto;clip-path:inset(0 100% 0 0);animation:logo-revela 1s cubic-bezier(.16,1,.3,1) .15s forwards}
 @keyframes cortina-sobe{to{transform:translateY(-100%)}}
 @media (prefers-reduced-motion:reduce){.js .cortina-bio{display:none}}
+/* sem o quadrado azul do navegador ao tocar no celular; o retorno do toque é o do próprio botão */
+html{-webkit-tap-highlight-color:transparent}
 /* sem a foto do tecido por cima da página: a dobra dela aparecia como uma linha diagonal sobre os botões */
 .pagina::after{display:none!important}
 /* placa do studio: o barbante desce bem no centro da argolinha e a placa balança em volta dela */

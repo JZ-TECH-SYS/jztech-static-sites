@@ -862,3 +862,5 @@ html{scroll-padding-top:88px}
 .js .hero-etq .etq-halo{animation-delay:.85s!important}
 /* etiquetas do topo lado a lado no computador: a pequena fica à esquerda da grande, sem cobrir */
 @media (min-width:961px){.hero-etq .etq-p{left:calc(50% - clamp(240px,21vw,320px) / 2 - clamp(150px,12.5vw,190px) - 32px)!important}}
+/* sem o quadrado azul do navegador ao tocar no celular (em qualquer link ou botão); o retorno do toque é o do próprio botão */
+html{-webkit-tap-highlight-color:transparent}
