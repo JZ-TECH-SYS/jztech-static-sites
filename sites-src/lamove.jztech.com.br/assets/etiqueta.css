@@ -37,3 +37,5 @@
 .etq-gira::before{content:"";position:absolute;left:6%;right:6%;top:10%;bottom:-3%;border-radius:12px;background:rgba(0,0,0,.42);filter:blur(18px);transform:translateZ(-2px);pointer-events:none}
 .etq-balanco,.etq-gira{will-change:transform}
 .etq-gira::before{filter:none!important;left:-4%;right:-4%;top:6%;bottom:-8%;background:radial-gradient(closest-side,rgba(0,0,0,.4),rgba(0,0,0,0))!important}
+/* a etiqueta gira em volta da argolinha: o cordão continua no centro dela com qualquer inclinação */
+.etq-tilt{transform-origin:50% calc(4.4% + 11px)}
