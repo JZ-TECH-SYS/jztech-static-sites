@@ -1,6 +1,6 @@
 // Etiqueta gigante: gira (rotateY) para mostrar a próxima coleção; clique, toque, arrasto ou teclado; troca sozinha a cada 5 s
-// rótulo de cada etiqueta: só o que a loja publicou (Essenza e Coral são da 1ª coleção)
-const ROTULO = { 'Essenza': '1ª coleção', 'Coral': '1ª coleção', '1ª coleção': 'Lançamento', 'Play': 'Beach tennis', 'Pace': 'Corrida' };
+// rótulo de cada etiqueta: o tipo de cada coleção, como a loja passou (24/11/2026)
+const ROTULO = { 'Vibra': 'Lifestyle fitness', 'Play': 'Beach tennis', 'Pace': 'Corrida', 'Mini Girls': 'Infantil' };
 (() => {
   const calma = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('.etq-caixa').forEach((caixa) => {
