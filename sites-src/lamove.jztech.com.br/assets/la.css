@@ -868,7 +868,7 @@ html{-webkit-tap-highlight-color:transparent}
 .curadoria{padding:clamp(64px,8vw,112px) 0;overflow:hidden}
 .cur-duas{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,96px);align-items:center}
 .cur-foto{position:relative;margin:0;border-radius:200px 200px 22px 22px;overflow:visible}
-.cur-foto img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 0;border-radius:inherit;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.cur-foto img{display:block;width:100%;height:auto;aspect-ratio:1280/2112;object-fit:cover;object-position:50% 0;border-radius:inherit;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
 .cur-foto::before{content:"";position:absolute;inset:-14px -14px 14px 14px;border:1px solid rgba(127,216,200,.35);border-radius:inherit;z-index:-1}
 .cur-foto figcaption{position:absolute;left:18px;bottom:16px;font:500 12px/1 var(--texto);letter-spacing:.16em;text-transform:uppercase;color:var(--papel);background:rgba(4,29,29,.55);padding:8px 12px;border-radius:99px;backdrop-filter:blur(6px)}
 .cur-selo{position:absolute;right:-22px;top:18%;width:clamp(96px,11vw,128px);height:auto;animation:cur-gira 26s linear infinite}
