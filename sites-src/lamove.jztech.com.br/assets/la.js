@@ -128,9 +128,12 @@ document.querySelectorAll('.vid-fonte').forEach((v) => {
 // Faixas infinitas (coleções e depoimentos): rolam sozinhas, arrastam com mouse ou dedo, pausam só com o mouse em cima ou segurando
 document.querySelectorAll('.marquee').forEach((mq) => {
   const tr = mq.querySelector('.trilho'); if (!tr) return;
-  const orig = [...tr.children]; orig.forEach((c) => { const k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); k.querySelectorAll('a,button').forEach((a) => a.tabIndex = -1); tr.appendChild(k); });
+  const orig = [...tr.children], n = orig.length;
+  const copia = () => orig.forEach((c) => { const k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); k.querySelectorAll('a,button').forEach((a) => a.tabIndex = -1); tr.appendChild(k); });
+  copia();
   let x = 0, vel = calmo ? 0 : 0.45 * (mq.dataset.dir === '-1' ? -1 : 1), sobre = false, segura = false, x0 = 0, xs = 0, ultimo = performance.now(), larg = 0;
-  const mede = () => { larg = tr.scrollWidth / 2; }; mede(); addEventListener('resize', mede); addEventListener('load', mede);
+  // volta = do 1º item até a 1ª cópia dele (conta o espaço entre eles); poucos itens em tela larga = mais cópias, senão sobra buraco no fim
+  const mede = () => { larg = tr.children[n].offsetLeft - tr.children[0].offsetLeft; while (larg && tr.scrollWidth - larg < mq.clientWidth + larg) copia(); }; mede(); addEventListener('resize', mede); addEventListener('load', mede);
   const quadro = (t) => { const dt = Math.min(48, t - ultimo); ultimo = t; if (!sobre && !segura) x -= vel * dt / 16.7; if (larg) { if (x <= -larg) x += larg; if (x > 0) x -= larg; } tr.style.transform = `translate3d(${x}px,0,0)`; requestAnimationFrame(quadro); };
   requestAnimationFrame(quadro);
   mq.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') sobre = true; });
