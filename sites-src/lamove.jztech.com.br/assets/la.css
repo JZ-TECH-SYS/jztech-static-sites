@@ -419,7 +419,7 @@ html:not(.js) .resp p{opacity:1;transform:none}
 .manifesto{font:300 clamp(40px,5.4vw,76px)/1.04 var(--texto);letter-spacing:-.03em;color:var(--teal-esc)}
 .ess-frase{margin-top:24px;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:#03696A}
 .ess-frase i{font-style:normal;color:#B8924E;margin:0 6px}
-.mods{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mods{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .mod{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:3/4;background:#0B3C3D}
 .mod figure{position:absolute;inset:0;margin:0}
 .mod img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform .9s var(--sai)}
@@ -545,7 +545,7 @@ html:not(.js) .resp p{opacity:1;transform:none}
 @media (max-width:960px){
   .hero-grade{grid-template-columns:1fr}
   .hero-comp{height:auto;aspect-ratio:1.05;max-width:520px}
-  .mods{grid-template-columns:repeat(3,1fr)}
+  .mods{grid-template-columns:repeat(2,1fr)}
   .car-grade,.vale-in,.faq-grade{grid-template-columns:1fr}
   .rod-grade{grid-template-columns:1fr 1fr}
 }
@@ -553,7 +553,6 @@ html:not(.js) .resp p{opacity:1;transform:none}
   .hero{padding:96px 0 48px}
   .hero-sub{font-size:17px}
   .mods{grid-template-columns:repeat(2,1fr)}
-  .mods .mod:last-child{grid-column:1/3;aspect-ratio:2/1.2}
   .col-card{width:84vw}
   .rod-grade{grid-template-columns:1fr}
   .rod-gigante{font-size:17vw}
